@@ -4,7 +4,7 @@ import {
   PropsWithChildren,
   ReactNode,
 } from 'react';
-import cn from '../../utils/cn.ts';
+import cn from 'classnames';
 
 export interface CardProps
   extends PropsWithChildren,

@@ -6,12 +6,24 @@ import { PopoverPage } from '../../pages/popover-page/popover-page.tsx';
 import { TooltipPage } from '../../pages/tooltip-page/tooltip-page.tsx';
 import { ModalPage } from '../../pages/modal-page/modal-page.tsx';
 import { DrawerPage } from '../../pages/drawer-page/drawer-page.tsx';
+import { IconButtonPage } from '../../pages/icon-button-page/icon-button-page.tsx';
+import { FloatButtonPage } from '../../pages/float-button-page/float-button-page.tsx';
 
 export const ROUTES = [
   {
     path: '/buttons',
     element: <ButtonPage />,
     title: 'Button',
+  },
+  {
+    path: '/icon-button',
+    element: <IconButtonPage />,
+    title: 'Icon Button',
+  },
+  {
+    path: '/float-button',
+    element: <FloatButtonPage />,
+    title: 'Float Button',
   },
   {
     path: '/collapse',
@@ -49,8 +61,23 @@ export const ROUTES = [
     title: 'Drawer',
   },
   {
-    path: '/tooltip',
-    element: <TooltipPage />,
-    title: 'Tooltip',
+    path: '/icon-button',
+    element: <IconButtonPage />,
+    title: 'Icon Button',
+  },
+  {
+    path: '/icon-button',
+    element: <IconButtonPage />,
+    title: 'Icon Button',
+  },
+  {
+    path: '/icon-button',
+    element: <IconButtonPage />,
+    title: 'Icon Button',
+  },
+  {
+    path: '/icon-button',
+    element: <IconButtonPage />,
+    title: 'Icon Button',
   },
 ];

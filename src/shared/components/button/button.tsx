@@ -1,10 +1,10 @@
-import { HTMLAttributes } from 'react';
+import { ForwardedRef, forwardRef, HTMLAttributes } from 'react';
 import { Link } from 'react-router-dom';
-import cn from '../../utils/cn.ts';
+import cn from 'classnames';
 
-type ButtonVariants = 'outline' | 'light' | 'danger';
+type ButtonVariants = 'outline' | 'light' | 'danger' | 'primary';
 
-interface ButtonProps
+export interface ButtonProps
   extends HTMLAttributes<HTMLButtonElement & HTMLAnchorElement> {
   href?: string;
   disabled?: boolean;
@@ -20,23 +20,32 @@ const BUTTONS_VARIANTS: Record<ButtonVariants, string> = {
   outline: 'border-border bg-accent hover:bg-bg/30',
   danger: 'border-red bg-bg hover:bg-bg/30',
   light: 'border-white text-black bg-white hover:bg-light_grey',
+  primary: 'hover:bg-accent border-0',
 };
 
-export const Button = ({
-  href,
-  variant = 'outline',
-  disabled,
-  ...props
-}: ButtonProps) => {
+export const Button = forwardRef<
+  HTMLButtonElement | HTMLAnchorElement,
+  ButtonProps
+>(({ href, variant = 'outline', disabled, ...props }, ref) => {
   const { children, ...rootProps } = props;
 
   const Root = ({ children, ...properties }: RootProps) =>
     href ? (
-      <Link role='button' {...properties} to={href}>
+      <Link
+        ref={ref as ForwardedRef<HTMLAnchorElement>}
+        role='button'
+        {...properties}
+        to={href}
+      >
         {children}
       </Link>
     ) : (
-      <button {...{ ...properties, disabled }}>{children}</button>
+      <button
+        ref={ref as ForwardedRef<HTMLButtonElement>}
+        {...{ ...properties, disabled }}
+      >
+        {children}
+      </button>
     );
 
   return (
@@ -55,4 +64,6 @@ export const Button = ({
       {children}
     </Root>
   );
-};
+});
+
+Button.displayName = 'Button';

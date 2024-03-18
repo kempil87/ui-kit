@@ -6,7 +6,7 @@ import {
   ReactElement,
   ReactNode,
 } from 'react';
-import cn from '../../utils/cn.ts';
+import cn from 'classnames';
 
 export interface TooltipProps
   extends PropsWithChildren,
@@ -36,7 +36,7 @@ export const Tooltip = ({
         {...props}
         data-visible={JSON.stringify(opened)}
         className={cn(
-          '-top-2.5 left-1/2 -translate-x-1/2 text-xs min-w-fit data-[visible=true]:scale-100 data-[visible=true]:opacity-100 scale-0 peer-hover:scale-100 origin-bottom opacity-0 peer-hover:opacity-100 pointer-events-none transition-all duration-300 ease-in rounded-md backdrop-blur bg-opacity-50 bg-bg border-border border py-1 px-5 z-50 -translate-y-full  absolute',
+          '-top-2.5 left-1/2 whitespace-nowrap -translate-x-1/2 text-xs min-w-fit data-[visible=true]:scale-100 data-[visible=true]:opacity-100 scale-0 peer-hover:scale-100 origin-bottom opacity-0 peer-hover:opacity-100 pointer-events-none transition-all duration-300 ease-in rounded-md bg-white text-black border-light_grey border py-1 px-5 z-50 -translate-y-full  absolute',
           className
         )}
       >
@@ -46,7 +46,7 @@ export const Tooltip = ({
             viewBox='0 0 24 24'
             width='10'
             height='10'
-            className='tooltip-content-chevron absolute mx-auto inset-x-0 bottom-0.5 fill-border'
+            className='tooltip-content-chevron absolute mx-auto inset-x-0 bottom-0.5 fill-white'
           >
             <path d='M19.749,9.464,5,.048V23.989L19.743,14.54a3,3,0,0,0,.006-5.076Z' />
           </svg>

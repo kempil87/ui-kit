@@ -7,7 +7,7 @@ import {
   ReactNode,
   useRef,
 } from 'react';
-import cn from '../../utils/cn.ts';
+import cn from 'classnames';
 import { useOnClickOutside } from 'usehooks-ts';
 
 export interface PopoverProps

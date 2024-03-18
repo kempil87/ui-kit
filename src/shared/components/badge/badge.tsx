@@ -1,5 +1,5 @@
 import { HTMLAttributes, PropsWithChildren } from 'react';
-import cn from '../../utils/cn';
+import cn from 'classnames';
 export interface BadgeProps
   extends PropsWithChildren,
     HTMLAttributes<HTMLDivElement> {

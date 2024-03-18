@@ -1,6 +1,6 @@
 import { Layout } from './shared/components/layout/layout.tsx';
 import { Navigate, Route, Routes } from 'react-router-dom';
-import { ROUTES } from './shared/contants/routes.tsx';
+import { ROUTES } from './shared/constants/routes.tsx';
 
 export const App = () => {
   return (

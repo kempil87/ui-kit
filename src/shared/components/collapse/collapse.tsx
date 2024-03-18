@@ -1,4 +1,5 @@
 import { PropsWithChildren, ReactNode, useRef } from 'react';
+import { Icon } from '../icon/icon.tsx';
 
 type CollapseProps = PropsWithChildren;
 export interface CollapseItemProps extends PropsWithChildren {
@@ -29,7 +30,9 @@ Collapse.Item = ({
   icon,
   extra,
 }: CollapseItemProps) => {
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   const headerRef = useRef<HTMLButtonElement>(null);
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   const contentRef = useRef<HTMLDivElement>(null);
 
   const toggle = () => {
@@ -57,21 +60,7 @@ Collapse.Item = ({
           <div className='inline-flex gap-x-4 items-center justify-start w-full'>
             <div className='group-data-[open=true]:rotate-0 -rotate-90 transition-transform duration-300 ease-linear'>
               {icon || (
-                <svg
-                  xmlns='http://www.w3.org/2000/svg'
-                  width='14'
-                  height='12'
-                  viewBox='0 0 22 12'
-                  fill='none'
-                >
-                  <path
-                    d='M1 1L11 11L21 1'
-                    stroke='white'
-                    strokeWidth='2'
-                    strokeLinecap='round'
-                    strokeLinejoin='round'
-                  />
-                </svg>
+                <Icon className='stroke-white size-4' name='common/arrow' />
               )}
             </div>
 

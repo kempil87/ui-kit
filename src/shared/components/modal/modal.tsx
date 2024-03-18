@@ -1,17 +1,18 @@
 import { PropsWithChildren, ReactNode, useEffect, useRef } from 'react';
-import cn from '../../utils/cn.ts';
-import { Portal } from '../portal/portal.tsx';
+import cn from 'classnames';
 import { useOnClickOutside } from 'usehooks-ts';
 import { Button } from '../button/button.tsx';
+import { Icon } from '../icon/icon.tsx';
 
 export interface ModalProps extends PropsWithChildren {
   header?: ReactNode;
   footer?: ReactNode;
   title?: ReactNode;
   visible?: boolean;
-  withPortal?: boolean;
+  bodyClassName?: HTMLDivElement['className'];
   closeIcon?: boolean;
   maskClosable?: boolean;
+  withBlurMask?: boolean;
   onClose: () => void;
 }
 
@@ -21,20 +22,13 @@ export const Modal = ({
   title,
   closeIcon = true,
   visible = false,
-  withPortal = true,
   maskClosable = true,
+  withBlurMask = true,
   onClose,
+  bodyClassName,
   children,
 }: ModalProps) => {
   const contentRef = useRef<HTMLDivElement>(null);
-
-  const Root = ({ children }: PropsWithChildren) => {
-    if (withPortal) {
-      return <Portal>{children}</Portal>;
-    }
-
-    return children;
-  };
 
   const close = () => {
     onClose();
@@ -53,36 +47,37 @@ export const Modal = ({
   useOnClickOutside(contentRef, outsideHandler);
 
   return (
-    <Root>
-      <div className={cn('modal-mask', { visible })}>
-        <div ref={contentRef} className={cn('modal-content', { visible })}>
-          {header || (
-            <div className='relative h-8'>
-              <span>{title}</span>
+    <div
+      className={cn('modal-mask', { visible }, { 'blur-mask': withBlurMask })}
+    >
+      <div
+        ref={contentRef}
+        className={cn('modal-content', bodyClassName, { visible })}
+      >
+        {header || (
+          <div className='relative h-8'>
+            <span>{title}</span>
 
-              {closeIcon && (
-                <button
-                  onClick={close}
-                  className='size-8 flex-center bg-accent border-border border rounded-md hover:bg-bg transition-all duration-300 absolute top-0 right-0'
-                >
-                  <svg className='fill-white size-3.5' viewBox='0 0 10 10'>
-                    <path d='M0.133854 0.780157C-0.0446179 0.601685 -0.0446179 0.312325 0.133854 0.133854C0.312325 -0.0446179 0.601684 -0.0446179 0.780156 0.133854L5 4.3537L9.21984 0.133854C9.39832 -0.0446179 9.68767 -0.0446179 9.86615 0.133854C10.0446 0.312325 10.0446 0.601685 9.86615 0.780157L5.64631 5L9.86615 9.21984C10.0446 9.39832 10.0446 9.68767 9.86615 9.86615C9.68767 10.0446 9.39832 10.0446 9.21984 9.86615L5 5.6463L0.780156 9.86615C0.601684 10.0446 0.312325 10.0446 0.133854 9.86615C-0.0446179 9.68767 -0.0446179 9.39832 0.133854 9.21984L4.35369 5L0.133854 0.780157Z' />
-                  </svg>
-                </button>
-              )}
-            </div>
-          )}
+            {closeIcon && (
+              <button
+                onClick={close}
+                className='size-8 flex-center bg-accent border-border border rounded-md hover:bg-bg transition-all duration-300 absolute top-0 right-0'
+              >
+                <Icon className='size-3.5' name='common/close' />
+              </button>
+            )}
+          </div>
+        )}
 
-          <div className='py-4'>{children}</div>
+        <div className='py-4'>{children}</div>
 
-          {footer || (
-            <div className='flex space-x-4 justify-end items-center'>
-              <Button variant='light'>Ок</Button>
-              <Button>Cancel</Button>
-            </div>
-          )}
-        </div>
+        {footer || (
+          <div className='flex space-x-4 justify-end items-center'>
+            <Button variant='light'>Ok</Button>
+            <Button>Cancel</Button>
+          </div>
+        )}
       </div>
-    </Root>
+    </div>
   );
 };
