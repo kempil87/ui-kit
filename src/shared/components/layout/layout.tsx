@@ -5,9 +5,7 @@ import { useLocalStorage } from 'usehooks-ts';
 import { IconButton } from '../icon-button/icon-button.tsx';
 import { useLocation } from 'react-router-dom';
 
-type Layout = PropsWithChildren;
-
-export const Layout = ({ children }: Layout) => {
+export const Layout = ({ children }: PropsWithChildren) => {
   const [visibleSidebar, setVisibleSidebar] = useLocalStorage(
     'sidebar',
     'true'
