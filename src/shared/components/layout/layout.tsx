@@ -34,21 +34,29 @@ export const Layout = ({ children }: Layout) => {
       <div className='flex gap-x-4 relative h-full pt-14'>
         <aside
           data-visible={visibleSidebar}
-          className='bg-bg peer justify-start items-start  transition-transform group duration-300 border-r data-[visible=false]:-translate-x-full border-border flex fixed z-40 bottom-0 top-14 left-0 h-screen w-[300px]'
+          className='bg-bg peer justify-start overflow-y-auto items-start  transition-transform group duration-300 border-r data-[visible=false]:-translate-x-full border-border flex fixed z-40 bottom-0 top-14 left-0 h-screen w-[300px]'
         >
           <div className='flex p-4 flex-col gap-2.5 w-full'>
             {ROUTES.map((el) => {
               const isActivePage = pathname.startsWith(el.path);
 
               return (
-                <Button
-                  {...(isActivePage && { variant: 'light' })}
-                  key={el.path}
-                  href={el.path}
-                  className='w-full'
-                >
-                  {el.title}
-                </Button>
+                <div>
+                  {el.forms && (
+                    <span className='text-sm block mb-2.5 font-medium'>
+                      Forms Elements
+                    </span>
+                  )}
+
+                  <Button
+                    {...(isActivePage && { variant: 'light' })}
+                    key={el.path}
+                    href={el.path}
+                    className='w-full'
+                  >
+                    {el.title}
+                  </Button>
+                </div>
               );
             })}
           </div>

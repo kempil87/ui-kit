@@ -11,9 +11,9 @@
 }
 
 .modal-content {
-    @apply bg-bg border transition-all p-4 border-border rounded-md w-full max-w-[600px] translate-y-10
+    @apply bg-bg border transition-all scale-75 p-4 border-border rounded-md w-full max-w-[600px] translate-y-10
 }
 
 .modal-content.visible {
-    @apply !translate-y-0
+    @apply !translate-y-0 scale-100
 }

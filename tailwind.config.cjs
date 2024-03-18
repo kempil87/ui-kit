@@ -14,7 +14,8 @@ export const colors = {
   light_grey: '#F4F4F4',
   gold: '#FFC300',
   border: '#27272a',
-  accent: '#18181c'
+  accent: '#18181c',
+  placeholder: '#828283'
 };
 
 module.exports = {

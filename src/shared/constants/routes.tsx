@@ -8,6 +8,8 @@ import { ModalPage } from '../../pages/modal-page/modal-page.tsx';
 import { DrawerPage } from '../../pages/drawer-page/drawer-page.tsx';
 import { IconButtonPage } from '../../pages/icon-button-page/icon-button-page.tsx';
 import { FloatButtonPage } from '../../pages/float-button-page/float-button-page.tsx';
+import { SegmentedPage } from '../../pages/segmented-page/segmented-page.tsx';
+import { InputPage } from '../../pages/input-page/input-page.tsx';
 
 export const ROUTES = [
   {
@@ -61,23 +63,14 @@ export const ROUTES = [
     title: 'Drawer',
   },
   {
-    path: '/icon-button',
-    element: <IconButtonPage />,
-    title: 'Icon Button',
+    path: '/segmented',
+    element: <SegmentedPage />,
+    title: 'Segmented',
   },
   {
-    path: '/icon-button',
-    element: <IconButtonPage />,
-    title: 'Icon Button',
-  },
-  {
-    path: '/icon-button',
-    element: <IconButtonPage />,
-    title: 'Icon Button',
-  },
-  {
-    path: '/icon-button',
-    element: <IconButtonPage />,
-    title: 'Icon Button',
+    path: '/input',
+    element: <InputPage />,
+    title: 'Input',
+    forms: true,
   },
 ];
