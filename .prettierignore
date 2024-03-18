@@ -1,0 +1,12 @@
+# common
+node_modules
+package.json
+.idea
+.vscode
+
+# next
+.next
+public
+
+# prod
+.build

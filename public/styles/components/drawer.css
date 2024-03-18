@@ -1,0 +1,31 @@
+.drawer-mask {
+    @apply fixed inset-0 bg-black bg-opacity-70 z-50 pointer-events-none invisible transition-all opacity-0
+}
+
+.drawer-mask.visible {
+    @apply !pointer-events-auto !opacity-100
+}
+
+.drawer-content {
+    @apply bg-bg fixed inset-y-0 min-w-[300px] border transition-all p-4 border-border rounded-md
+}
+
+.drawer-content.visible {
+    @apply !translate-x-0
+}
+
+.drawer-content-right {
+    right: 0;
+    transform: translateX(100%);
+    border-bottom-right-radius: 0;
+    border-top-right-radius: 0;
+    border-right-width: 0;
+}
+
+.drawer-content-left {
+    left: 0;
+    transform: translateX(-100%);
+    border-bottom-left-radius: 0;
+    border-top-left-radius: 0;
+    border-left-width: 0;
+}

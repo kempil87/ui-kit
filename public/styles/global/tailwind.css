@@ -1,0 +1,35 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    @font-face {
+        font-family: Granate;
+        font-weight: 500;
+        font-style: normal;
+        font-display: swap;
+        src: url('/../../fonts/ALSGranate-Medium.woff') format('woff'), url('/../../fonts/ALSGranate-Medium.woff2') format('woff2');
+    }
+
+    @font-face {
+        font-family: Granate;
+        font-weight: 400;
+        font-style: normal;
+        font-display: swap;
+        src: url('/../../fonts/ALSGranate-Regular.woff') format('woff'), url('/../../fonts/ALSGranate-Regular.woff2') format('woff2');
+    }
+
+    @font-face {
+        font-family: Granate;
+        font-weight: 300;
+        font-style: normal;
+        font-display: swap;
+        src: url('/../../fonts/ALSGranate-Light.woff') format('woff'), url('/../../fonts/ALSGranate-Light.woff2') format('woff2');
+    }
+}
+
+@layer {
+    .no-scrollbar::-webkit-scrollbar {
+        @apply hidden
+    }
+}

@@ -1,0 +1,38 @@
+@import "tailwind.css";
+@import "../components/toast.css";
+@import "../components/tooltip.css";
+@import "../components/modal.css";
+@import "../components/drawer.css";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scrollbar-gutter: stable;
+
+    width: 100%;
+
+    font-family: Granate, sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    color: #fff;
+
+    background: #000;
+}
+
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    margin: 0;
+    appearance: none;
+}
+
+input[type="number"] {
+    appearance:textfield; /* Firefox */
+}
