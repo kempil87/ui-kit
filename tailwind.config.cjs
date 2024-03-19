@@ -53,7 +53,7 @@ module.exports = {
     zIndex: {
       ...defaultTheme.zIndex,
       'full':'999'
-    }
+    },
   },
   variants: {
     extend: {},

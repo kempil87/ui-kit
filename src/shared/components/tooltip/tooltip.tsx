@@ -36,7 +36,7 @@ export const Tooltip = ({
         {...props}
         data-visible={JSON.stringify(opened)}
         className={cn(
-          '-top-2.5 left-1/2 whitespace-nowrap -translate-x-1/2 text-xs min-w-fit data-[visible=true]:scale-100 data-[visible=true]:opacity-100 scale-0 peer-hover:scale-100 origin-bottom opacity-0 peer-hover:opacity-100 pointer-events-none transition-all duration-300 ease-in rounded-md bg-white text-black border-light_grey border py-1 px-5 z-50 -translate-y-full  absolute',
+          '-top-2.5 left-1/2 whitespace-nowrap -translate-x-1/2 text-xs min-w-fit data-[visible=true]:scale-100 data-[visible=true]:opacity-100 scale-0 peer-hover:scale-100 origin-bottom opacity-0 peer-hover:opacity-100 pointer-events-none transition-all duration-300 ease-in rounded-md bg-white text-black border-light_grey border py-1 px-5 z-full -translate-y-full  absolute',
           className
         )}
       >

@@ -109,12 +109,12 @@ export const Select = ({
           return (
             <>
               <button
-                className='flex group min-h-[40px] h-full w-full min-w-fit cursor-pointer items-center rounded-md bg-bg outline-none'
+                className='flex group min-h-[36px] h-full w-full min-w-fit cursor-pointer items-center rounded-md bg-bg outline-none'
                 onClick={onFocus}
               >
                 <div
                   className={cn(
-                    'relative truncate flex flex-wrap gap-1.5 px-5 py-1 text-white/60',
+                    'relative truncate text-sm flex flex-wrap gap-1.5 px-5 py-1 text-white/60',
                     {
                       '!text-white': selectLabels?.length,
                     }
@@ -133,7 +133,7 @@ export const Select = ({
                   ref={arrowRef}
                   name='common/arrow'
                   className={cn(
-                    'absolute right-3 peer-data-[visible=true]:rotate-0 size-4 -rotate-180 fill-placeholder transition-all duration-300'
+                    'absolute right-3 peer-data-[visible=true]:rotate-0 size-3.5 -rotate-180 fill-placeholder transition-all duration-300'
                   )}
                 />
               </button>

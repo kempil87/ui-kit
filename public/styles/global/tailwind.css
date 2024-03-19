@@ -32,4 +32,7 @@
     .no-scrollbar::-webkit-scrollbar {
         @apply hidden
     }
+    .transition-pagination {
+        transition: background-color ,color;
+    }
 }
