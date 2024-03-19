@@ -11,6 +11,7 @@ import { FloatButtonPage } from '../../pages/float-button-page/float-button-page
 import { SegmentedPage } from '../../pages/segmented-page/segmented-page.tsx';
 import { InputPage } from '../../pages/input-page/input-page.tsx';
 import { SwitchPage } from '../../pages/switch-page/switch-page.tsx';
+import { SelectPage } from '../../pages/select-page/select-page.tsx';
 
 export const ROUTES = [
   {
@@ -73,6 +74,11 @@ export const ROUTES = [
     element: <InputPage />,
     title: 'Input',
     forms: true,
+  },
+  {
+    path: '/select',
+    element: <SelectPage />,
+    title: 'Select',
   },
   {
     path: '/switch',

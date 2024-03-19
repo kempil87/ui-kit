@@ -1,0 +1,3 @@
+.select-menu-hidden {
+    @apply translate-y-6 opacity-0 invisible
+}
