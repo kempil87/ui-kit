@@ -20,8 +20,8 @@ export interface IconProps
   strokeColor?: string;
 }
 
-export const Icon = forwardRef(
-  ({ name, className, gradient, ...props }: IconProps, ref) => {
+export const Icon = forwardRef<SVGSVGElement, IconProps>(
+  ({ name, className, gradient, ...props }, ref) => {
     const { viewBox, filePath, iconName, defaultSize } = getIconMeta(name);
     const innerStrokeColor = 'url(#gradient#5BC0D1)';
     const innerFillColor = 'url(#gradient#5BC0D1)';
