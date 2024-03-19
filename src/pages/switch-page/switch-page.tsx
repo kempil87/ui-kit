@@ -12,9 +12,16 @@ export const SwitchPage = () => {
         <Switch value={isActive} onChange={setIsActive} />
 
         <Switch
-          label='Basic'
+          label='Basic Label'
           value={isActiveLabel}
           onChange={setIsActiveLabel}
+        />
+
+        <Switch
+          value={false}
+          onChange={(s) => console.log(s)}
+          disabled
+          label='Disabled'
         />
       </div>
     </Card>

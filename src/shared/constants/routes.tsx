@@ -13,6 +13,7 @@ import { InputPage } from '../../pages/input-page/input-page.tsx';
 import { SwitchPage } from '../../pages/switch-page/switch-page.tsx';
 import { SelectPage } from '../../pages/select-page/select-page.tsx';
 import { ChipPage } from '../../pages/chip-page/chip-page.tsx';
+import { PaginationPage } from '../../pages/pagination-page/pagination-page.tsx';
 
 export const ROUTES = [
   {
@@ -74,6 +75,11 @@ export const ROUTES = [
     path: '/chip',
     element: <ChipPage />,
     title: 'Chip',
+  },
+  {
+    path: '/pagination',
+    element: <PaginationPage />,
+    title: 'Pagination',
   },
   {
     path: '/input',

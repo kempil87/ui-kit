@@ -141,10 +141,12 @@ export const Select = ({
               <div
                 data-visible='false'
                 ref={menuRef}
-                className='peer data-[visible=false]:opacity-0 data-[visible=false]:invisible data-[visible=false]:translate-y-6 bg-bg absolute top-[120%] z-40 max-h-80 w-full space-y-2 overflow-y-auto rounded-md border border-border bg-dark px-3 py-2  transition-all'
+                className='peer data-[visible=false]:opacity-0 data-[visible=false]:invisible data-[visible=false]:translate-y-6 bg-bg absolute top-[120%] z-40 max-h-80 w-full space-y-2 overflow-y-auto rounded-md border border-border bg-dark px-3 py-2 transition-all'
               >
                 {renderClearAll?.(clearAll) || (
-                  <button onClick={clearAll}>Clear all</button>
+                  <button className='text-sm' onClick={clearAll}>
+                    Clear all
+                  </button>
                 )}
 
                 {options?.length ? (

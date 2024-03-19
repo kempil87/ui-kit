@@ -22,8 +22,12 @@ export const BadgePage = () => {
         </Badge>
       </div>
 
-      <Button onClick={() => setCount((p) => p + 1)} className='mt-5'>
-        Change Count
+      <Button onClick={() => setCount((p) => p - 1)} className='mt-5'>
+        Dec Count
+      </Button>
+
+      <Button onClick={() => setCount((p) => p + 1)} className='ml-3 mt-5'>
+        Inc Count
       </Button>
     </Card>
   );

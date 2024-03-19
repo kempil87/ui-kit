@@ -9,7 +9,13 @@ export interface Switch
   wrapClassName?: HTMLDivElement['className'];
 }
 
-export const Switch = ({ onChange, wrapClassName, value, label }: Switch) => {
+export const Switch = ({
+  onChange,
+  disabled,
+  wrapClassName,
+  value,
+  label,
+}: Switch) => {
   const id = useId();
 
   const change = (e: ChangeEvent<HTMLInputElement>) => {
@@ -20,17 +26,19 @@ export const Switch = ({ onChange, wrapClassName, value, label }: Switch) => {
     <div className={cn('inline-flex items-center gap-1.5', wrapClassName)}>
       <label
         className={cn(
-          'h-[17px] transition-all duration-300 cursor-pointer select-none w-8 relative rounded-full p-px bg-bg border-border border active:outline-none',
-          { 'bg-placeholder': value }
+          'h-[17px] transition-all duration-300 cursor-pointer select-none w-8 relative rounded-full p-px bg-bg border-border border',
+          { 'bg-placeholder': value },
+          { '!cursor-not-allowed': disabled }
         )}
         htmlFor={id}
       >
         <input
           hidden
-          id={id}
           value={JSON.stringify(value)}
           onChange={change}
           type='checkbox'
+          className='focus:outline-0'
+          {...{ disabled, id }}
         />
         <div
           style={{
@@ -43,7 +51,12 @@ export const Switch = ({ onChange, wrapClassName, value, label }: Switch) => {
       </label>
 
       {label && (
-        <label htmlFor={id} className='text-sm select-none cursor-pointer'>
+        <label
+          htmlFor={id}
+          className={cn('text-sm select-none cursor-pointer', {
+            '!cursor-not-allowed': disabled,
+          })}
+        >
           {label}
         </label>
       )}
