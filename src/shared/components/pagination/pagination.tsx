@@ -53,9 +53,10 @@ export const Pagination = (props: PaginationProps) => {
             return (
               <button
                 className={cn(
-                  'size-9 text-sm hover:text-placeholder transition-pagination duration-300',
+                  'size-9 text-sm transition-pagination duration-300',
                   {
                     'bg-border': currentPage === i,
+                    'hover:text-placeholder': currentPage !== i,
                   }
                 )}
                 key={index}
