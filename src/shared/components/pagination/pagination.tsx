@@ -33,10 +33,10 @@ export const Pagination = (props: PaginationProps) => {
 
   return (
     <div className={cn(props.wrapClassName)}>
-      <nav className='isolate inline-flex children:border-r children:border-border last-of-type:children:border-r-0 items-center border border-border rounded-md h-8'>
+      <nav className='isolate h-9 inline-flex children:border-r children:border-border last-of-type:children:border-r-0 items-center border border-border rounded-md'>
         <button
           className={cn(
-            'size-8 flex-center transition-all duration-300 disabled:cursor-not-allowed disabled:text-grey'
+            'size-9 flex-center transition-all duration-300 disabled:cursor-not-allowed disabled:text-grey'
           )}
           disabled={isFirstPage}
           onClick={onPrev}
@@ -47,7 +47,7 @@ export const Pagination = (props: PaginationProps) => {
         {paginationRange.map((i, index) => {
           if (i === DOTS) {
             return (
-              <button disabled className='size-8 flex-center' key={index}>
+              <button disabled className='size-9 flex-center' key={index}>
                 <span className='block h-full text-center'>{DOTS}</span>
               </button>
             );
@@ -56,7 +56,7 @@ export const Pagination = (props: PaginationProps) => {
           return (
             <button
               className={cn(
-                'size-8 text-sm hover:text-placeholder transition-pagination duration-300',
+                'size-9 text-sm hover:text-placeholder transition-pagination duration-300',
                 {
                   'bg-border': currentPage === i,
                 }
@@ -71,7 +71,7 @@ export const Pagination = (props: PaginationProps) => {
 
         <button
           className={cn(
-            'size-8 flex-center transition-all duration-300 disabled:cursor-not-allowed disabled:text-grey'
+            'size-9 flex-center transition-all duration-300 disabled:cursor-not-allowed disabled:text-grey'
           )}
           disabled={isLastPage}
           onClick={onNext}

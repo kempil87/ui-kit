@@ -41,7 +41,7 @@ export const Layout = ({ children }: PropsWithChildren) => {
             iconProps={{ name: 'common/collapse', className: 'min-size-6' }}
           />
 
-          <Button variant='light'>Выйти</Button>
+          <Button variant='light'>Logout</Button>
         </div>
       </header>
 
