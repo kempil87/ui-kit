@@ -13,9 +13,7 @@ export const selectedLabels = (options: SelectOption[], values: number[]) => {
   filteredObjects.sort(
     (a, b) => values.indexOf(a.value!) - values.indexOf(b.value!)
   );
-  const labels = filteredObjects.map((obj) => obj.label);
-
-  return labels.join(',');
+  return filteredObjects;
 };
 
 export const selectedOption = (

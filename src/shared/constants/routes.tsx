@@ -12,6 +12,7 @@ import { SegmentedPage } from '../../pages/segmented-page/segmented-page.tsx';
 import { InputPage } from '../../pages/input-page/input-page.tsx';
 import { SwitchPage } from '../../pages/switch-page/switch-page.tsx';
 import { SelectPage } from '../../pages/select-page/select-page.tsx';
+import { ChipPage } from '../../pages/chip-page/chip-page.tsx';
 
 export const ROUTES = [
   {
@@ -68,6 +69,11 @@ export const ROUTES = [
     path: '/segmented',
     element: <SegmentedPage />,
     title: 'Segmented',
+  },
+  {
+    path: '/chip',
+    element: <ChipPage />,
+    title: 'Chip',
   },
   {
     path: '/input',

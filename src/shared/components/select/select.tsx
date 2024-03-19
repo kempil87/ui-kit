@@ -4,6 +4,7 @@ import cn from 'classnames';
 import { Icon } from '../icon/icon';
 import { Controller, useFormContext } from 'react-hook-form';
 import { selectedLabels, selectedOption } from './utils/select-labels.ts';
+import { SelectLabel } from './select-label.tsx';
 
 export interface SelectOption {
   label: string;
@@ -17,6 +18,7 @@ export interface SelectProps {
   multiple?: boolean;
   notFoundText?: string;
   placeholder?: string;
+  renderClearAll?: (onClear: () => void) => void;
 }
 
 export const Select = ({
@@ -24,6 +26,7 @@ export const Select = ({
   name,
   handleChange,
   placeholder,
+  renderClearAll,
   multiple,
   notFoundText = 'Ничего не найдено',
 }: SelectProps) => {
@@ -96,6 +99,13 @@ export const Select = ({
             !multiple && onBlur();
           };
 
+          const clearAll = () => {
+            onChange([]);
+            handleChange?.(name, []);
+
+            !multiple && onBlur();
+          };
+
           return (
             <>
               <button
@@ -107,7 +117,13 @@ export const Select = ({
                     '!text-white': selectLabels?.length,
                   })}
                 >
-                  {selectLabels || placeholder || ''}
+                  <SelectLabel
+                    {...{
+                      selectLabels,
+                      placeholder,
+                      onRemove: onSelectChange,
+                    }}
+                  />
                 </div>
 
                 <Icon
@@ -124,6 +140,10 @@ export const Select = ({
                 ref={menuRef}
                 className='peer data-[visible=false]:opacity-0 data-[visible=false]:invisible data-[visible=false]:translate-y-6 bg-bg absolute top-[120%] z-40 max-h-80 w-full space-y-2 overflow-y-auto rounded-md border border-border bg-dark px-3 py-2  transition-all'
               >
+                {renderClearAll?.(clearAll) || (
+                  <button onClick={clearAll}>Clear all</button>
+                )}
+
                 {options?.length ? (
                   options.map((option) => {
                     const isSelected = selectedOption(option, value);

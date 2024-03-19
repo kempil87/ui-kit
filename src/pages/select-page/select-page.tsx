@@ -22,6 +22,9 @@ export const SelectPage = () => {
             options={options}
           />
           <Select
+            renderClearAll={(onClear) => (
+              <button onClick={onClear}>Сбросить</button>
+            )}
             placeholder='multiple select'
             multiple
             name='seelect_2'
