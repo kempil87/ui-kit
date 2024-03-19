@@ -21,13 +21,8 @@ export const SelectLabel = ({
   }
 
   if (Array.isArray(selectLabels)) {
-    return selectLabels.map(({ label, value }, index) => (
-      <Chip
-        onRemove={() => handleRemove(value)}
-        {...(index && { className: 'ml-1.5' })}
-      >
-        {label}
-      </Chip>
+    return selectLabels.map(({ label, value }) => (
+      <Chip onRemove={() => handleRemove(value)}>{label}</Chip>
     ));
   }
 

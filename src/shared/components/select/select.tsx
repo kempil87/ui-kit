@@ -109,13 +109,16 @@ export const Select = ({
           return (
             <>
               <button
-                className='flex group min-h-[40px] w-full min-w-fit cursor-pointer items-center rounded-md bg-bg outline-none'
+                className='flex group min-h-[40px] h-full w-full min-w-fit cursor-pointer items-center rounded-md bg-bg outline-none'
                 onClick={onFocus}
               >
                 <div
-                  className={cn('relative truncate px-5 py-1 text-white/60', {
-                    '!text-white': selectLabels?.length,
-                  })}
+                  className={cn(
+                    'relative truncate flex flex-wrap gap-1.5 px-5 py-1 text-white/60',
+                    {
+                      '!text-white': selectLabels?.length,
+                    }
+                  )}
                 >
                   <SelectLabel
                     {...{
