@@ -10,10 +10,10 @@ export const IconButton = ({ iconProps, ...props }: IconButtonProps) => {
   return (
     <Button
       {...{ ...props, variant: props.variant || 'primary' }}
-      className={cn('aspect-square', props.className)}
+      className={cn('aspect-square !p-0', props.className)}
       title={props.title ?? `${iconProps.name.replace('/', '')} icon`}
     >
-      <Icon {...iconProps} className={cn('min-size-5', iconProps.className)} />
+      <Icon {...iconProps} className={cn('size-5', iconProps.className)} />
     </Button>
   );
 };

@@ -4,7 +4,7 @@ import { IconButton } from '../../shared/components/icon-button/icon-button.tsx'
 export const IconButtonPage = () => {
   return (
     <Card title='Icon Button'>
-      <div className='flex items-center gap-x-5'>
+      <div className='flex items-center flex-wrap gap-5'>
         <IconButton iconProps={{ name: 'common/user' }} />
 
         <IconButton

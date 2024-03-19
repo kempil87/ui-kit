@@ -1,5 +1,5 @@
 .modal-mask {
-    @apply fixed inset-0 bg-black bg-opacity-70 backdrop-blur z-50 flex-center pointer-events-none invisible transition-all opacity-0
+    @apply fixed inset-0 bg-black bg-opacity-70 backdrop-blur z-full flex-center pointer-events-none invisible transition-all opacity-0
 }
 
 .modal-mask.blur-mask {
@@ -11,7 +11,7 @@
 }
 
 .modal-content {
-    @apply bg-bg border transition-all scale-75 p-4 border-border rounded-md w-full max-w-[600px] translate-y-10
+    @apply bg-bg border transition-all scale-75 p-4 border-border rounded-md w-full max-w-[600px] translate-y-10 max-lg:mx-2
 }
 
 .modal-content.visible {

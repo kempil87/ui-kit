@@ -47,7 +47,7 @@ export const Segmented = ({
         style={{
           gridTemplateColumns: `repeat(${options.length}, minmax(0, 1fr))`,
         }}
-        className='bg-accent gap-x-2 relative grid border-border border rounded-md'
+        className='bg-accent overflow-x-auto gap-x-2 relative grid border-border border rounded-md'
       >
         {options.map((option) => (
           <button

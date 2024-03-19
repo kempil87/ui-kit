@@ -9,10 +9,10 @@ export const DrawerPage = () => {
 
   return (
     <Card title='Drawer'>
-      <div className='flex gap-x-5'>
+      <div className='flex gap-5 flex-wrap'>
         <Button onClick={() => setIsVisible(true)}>Open Drawer</Button>
         <Button onClick={() => setIsVisibleCustom(true)}>
-          Open Custom Footer Drawer
+          Open Custom Header Drawer
         </Button>
       </div>
 

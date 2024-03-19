@@ -12,7 +12,7 @@ export const ToastProvider = () => {
   return (
     <Portal>
       <div
-        className='fixed pointer-events-none z-50 flex-col gap-6 inset-x-0 flex items-center top-16'
+        className='fixed pointer-events-none z-full flex-col gap-6 inset-x-0 flex items-center top-16'
         id='toast-container'
       ></div>
     </Portal>

@@ -49,6 +49,10 @@ module.exports = {
     fontSize: {
       ...defaultTheme.fontSize,
       '10': '10px'
+    },
+    zIndex: {
+      ...defaultTheme.zIndex,
+      'full':'999'
     }
   },
   variants: {
@@ -108,7 +112,7 @@ module.exports = {
           position: 'absolute',
           top: '50%',
           transform: 'translateY(-50%)'
-        }
+        },
       });
     }
   ],

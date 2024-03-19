@@ -10,7 +10,7 @@ export const ToastPage = () => {
 
   return (
     <Card title='Toast'>
-      <div className='space-x-5'>
+      <div className='gap-5 flex-wrap flex items-center'>
         <Button onClick={onShowSuccess}>Show Success Toast</Button>
 
         <Button onClick={onShowError}>Show Error Toast</Button>

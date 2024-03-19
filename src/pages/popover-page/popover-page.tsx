@@ -34,7 +34,7 @@ const content = (
 export const PopoverPage = () => {
   return (
     <Card title='Popover'>
-      <div className='space-x-5'>
+      <div className='gap-5 flex-wrap flex items-center'>
         <Popover content={content}>
           <Button>Hover</Button>
         </Popover>

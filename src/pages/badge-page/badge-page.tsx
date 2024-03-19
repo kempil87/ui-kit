@@ -8,7 +8,7 @@ export const BadgePage = () => {
 
   return (
     <Card title='Badge'>
-      <div className='space-x-5'>
+      <div className='flex flex-wrap gap-5 items-center'>
         <Badge content={String(count)}>
           <Button>Badge {count}</Button>
         </Badge>

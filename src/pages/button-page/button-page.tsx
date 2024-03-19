@@ -5,20 +5,20 @@ import { Icon } from '../../shared/components/icon/icon.tsx';
 export const ButtonPage = () => {
   return (
     <Card title='Button'>
-      <div className='flex items-center gap-x-5'>
+      <div className='flex flex-wrap items-center gap-5'>
         <Button
           onClick={() => console.log('onClick btn')}
           className='test-classname'
         >
-          Контент
+          With Props
         </Button>
 
-        <Button href='/profile' variant='light'>
+        <Button href='/' variant='light'>
           <Icon name='common/user' className='size-4 mr-2' />
-          Контент
+          Link
         </Button>
 
-        <Button variant='danger'>Контент</Button>
+        <Button variant='danger'>Danger</Button>
       </div>
     </Card>
   );

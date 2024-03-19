@@ -9,7 +9,7 @@ export const ModalPage = () => {
 
   return (
     <Card title='Modal'>
-      <div className='flex gap-x-5'>
+      <div className='flex gap-5 flex-wrap items-center'>
         <Button onClick={() => setIsVisible(true)}>Open Modal</Button>
         <Button onClick={() => setIsVisibleCustom(true)}>
           Open Custom Footer Modal

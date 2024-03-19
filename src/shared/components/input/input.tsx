@@ -68,14 +68,14 @@ export const Input = ({
         {...{ ...props, value }}
       />
 
-      {allowClear && value && (
+      {value && allowClear && (
         <IconButton
           title='Clear'
           onClick={onClear}
-          className='pos-abs-y right-1 size-3 !p-3'
+          className={cn('pos-abs-y right-1 size-6')}
           iconProps={{
             name: 'common/close',
-            className: 'min-size-2.5',
+            className: 'size-3.5',
           }}
         />
       )}
