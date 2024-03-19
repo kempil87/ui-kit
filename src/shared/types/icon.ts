@@ -6,8 +6,10 @@ export interface SpritesMap {
     | 'close'
     | 'collapse'
     | 'done'
+    | 'empty'
     | 'home'
     | 'long_arrow'
+    | 'notification'
     | 'phone'
     | 'search'
     | 'spin'
@@ -25,7 +27,7 @@ export const SPRITES_META: {
   };
 } = {
   common: {
-    filePath: 'common.ba5792a5.svg',
+    filePath: 'common.e3591619.svg',
     items: {
       arrow: {
         viewBox: '0 0 22 12',
@@ -45,11 +47,17 @@ export const SPRITES_META: {
       done: {
         viewBox: '0 0 20 16',
       },
+      empty: {
+        viewBox: '0 0 24 24',
+      },
       home: {
         viewBox: '0 0 17 19',
       },
       long_arrow: {
         viewBox: '0 0 55 24',
+      },
+      notification: {
+        viewBox: '0 0 18 22',
       },
       phone: {
         viewBox: '0 0 21 22',

@@ -3,7 +3,7 @@
 }
 
 .table tr {
-    @apply hover:bg-border/20 divide-x-[1px] divide-border;
+    @apply  divide-x-[1px] divide-border;
 }
 
 .table th,
@@ -12,7 +12,7 @@
 }
 
 .table th {
-    @apply py-4 text-xs font-bold tracking-wider border-border border
+    @apply py-4 text-xs tracking-wider border-border border font-normal;
 }
 
 .table td {
@@ -25,6 +25,10 @@
 
 .table thead tr {
     @apply bg-accent
+}
+
+.table tbody tr {
+    @apply transition-all duration-300 hover:bg-accent/50
 }
 
 .table thead,

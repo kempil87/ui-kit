@@ -76,21 +76,23 @@ export const Table = ({
 
   return (
     <Root>
-      <table className='table'>
-        <TableHead {...{ columns, name, isLoading }} />
+      <div className='overflow-x-auto'>
+        <table className='table min-w-max'>
+          <TableHead {...{ columns, name, isLoading }} />
 
-        <TableBody
-          {...{
-            columns,
-            data,
-            isLoading,
-            notFoundText,
-            summary,
-            name,
-            onRowClick,
-          }}
-        />
-      </table>
+          <TableBody
+            {...{
+              columns,
+              data,
+              isLoading,
+              notFoundText,
+              summary,
+              name,
+              onRowClick,
+            }}
+          />
+        </table>
+      </div>
 
       {summary && <div className='mt-4'>{summary}</div>}
 

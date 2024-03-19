@@ -4,6 +4,7 @@ import { ROUTES } from '../../constants/routes.tsx';
 import { useLocalStorage, useOnClickOutside, useScreen } from 'usehooks-ts';
 import { IconButton } from '../icon-button/icon-button.tsx';
 import { useLocation } from 'react-router-dom';
+import { Dropdown } from '../dropdown/dropdown.tsx';
 
 export const Layout = ({ children }: PropsWithChildren) => {
   const sideBarRef = useRef<HTMLElement>(null);
@@ -27,9 +28,7 @@ export const Layout = ({ children }: PropsWithChildren) => {
   useOnClickOutside(sideBarRef, hideSidebar);
 
   useEffect(() => {
-    if (screenWidth < 1024) {
-      hideSidebar();
-    }
+    hideSidebar();
   }, [pathname, screenWidth]);
 
   return (
@@ -38,10 +37,51 @@ export const Layout = ({ children }: PropsWithChildren) => {
         <div className='flex-between h-full px-4'>
           <IconButton
             onClick={toggleSidebar}
-            iconProps={{ name: 'common/collapse', className: 'min-size-6' }}
+            iconProps={{ name: 'common/collapse', className: 'size-6' }}
           />
 
-          <Button variant='light'>Logout</Button>
+          <div className='flex items-center gap-5'>
+            <Dropdown
+              className='max-sm:-right-1/2 max-sm:translate-x-1/4'
+              content={
+                <div className='w-80 h-96 flex flex-col justify-between'>
+                  <span className='text-center block'>Notifications</span>
+
+                  <div className='flex items-center flex-col'>
+                    <svg
+                      className='stroke-placeholder'
+                      data-testid='geist-icon'
+                      fill='none'
+                      height='24'
+                      shapeRendering='geometricPrecision'
+                      stroke='currentColor'
+                      strokeLinecap='round'
+                      strokeLinejoin='round'
+                      strokeWidth='1.5'
+                      viewBox='0 0 24 24'
+                      width='24'
+                      aria-label='Empty inbox'
+                    >
+                      <path d='M22 12h-6l-2 3h-4l-2-3H2'></path>
+                      <path d='M5.45 5.11L2 12v6a2 2 0 002 2h16a2 2 0 002-2v-6l-3.45-6.89A2 2 0 0016.76 4H7.24a2 2 0 00-1.79 1.11z'></path>
+                    </svg>
+
+                    <span className='text-center text-placeholder text-sm block'>
+                      Empty
+                    </span>
+                  </div>
+
+                  <Button className='w-full'>Archive</Button>
+                </div>
+              }
+            >
+              <IconButton
+                iconProps={{ name: 'common/notification', className: 'size-4' }}
+              />
+            </Dropdown>
+
+            <Button variant='light'>Logout</Button>
+          </div>
         </div>
       </header>
 

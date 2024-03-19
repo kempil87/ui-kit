@@ -3,10 +3,11 @@ import { Button } from '../../shared/components/button/button.tsx';
 
 type Data = { id: number; name: string; surname: string };
 export const TablePage = () => {
-  const columns = [
+  const columns: TableColumn<Data>[] = [
     {
       dataKey: 'id',
       title: 'Identify',
+      sortKey: 'id',
     },
     {
       dataKey: 'name',
@@ -101,7 +102,7 @@ export const TablePage = () => {
         summary={
           <div className='text-sm'>
             <span>entries shown: </span>
-            <span>1/1</span>
+            <span>3/3</span>
           </div>
         }
       />
