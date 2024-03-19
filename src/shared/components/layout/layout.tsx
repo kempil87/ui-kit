@@ -59,7 +59,7 @@ export const Layout = ({ children }: PropsWithChildren) => {
                 <div>
                   {el.forms && (
                     <span className='text-sm block mb-2.5 font-medium'>
-                      Forms Elements
+                      Form Elements
                     </span>
                   )}
 

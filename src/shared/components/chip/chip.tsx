@@ -29,7 +29,10 @@ export const Chip = ({
       {withIcon && (
         <IconButton
           disabled={props.disabled}
-          onClick={onRemove}
+          onClick={(e) => {
+            e.stopPropagation();
+            onRemove?.();
+          }}
           className='!size-5 !rounded-full'
           variant='outline'
           iconProps={

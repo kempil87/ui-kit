@@ -10,6 +10,7 @@ export interface SpritesMap {
     | 'long_arrow'
     | 'phone'
     | 'search'
+    | 'spin'
     | 'user';
 }
 export const SPRITES_META: {
@@ -24,7 +25,7 @@ export const SPRITES_META: {
   };
 } = {
   common: {
-    filePath: 'common.c3d57dfe.svg',
+    filePath: 'common.ba5792a5.svg',
     items: {
       arrow: {
         viewBox: '0 0 22 12',
@@ -55,6 +56,9 @@ export const SPRITES_META: {
       },
       search: {
         viewBox: '0 0 22 22',
+      },
+      spin: {
+        viewBox: '0 0 24 24',
       },
       user: {
         viewBox: '0 0 256 256',

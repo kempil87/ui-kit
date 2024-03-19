@@ -4,11 +4,7 @@ import cn from 'classnames';
 
 export interface PaginationProps {
   lastPage: number | undefined;
-  countRecord?: number;
-  dataLength?: number;
-  initialValue?: number;
   siblingCount?: number;
-  tableName?: string;
   onChange: (page: number) => void;
   currentPage: number;
   wrapClassName?: HTMLDivElement['className'];

@@ -1,0 +1,35 @@
+.table {
+    @apply w-full text-left text-sm leading-snug text-white;
+}
+
+.table tr {
+    @apply hover:bg-border/20 divide-x-[1px] divide-border;
+}
+
+.table th,
+.table td {
+    @apply p-2;
+}
+
+.table th {
+    @apply py-4 text-xs font-bold tracking-wider border-border border
+}
+
+.table td {
+    @apply border-b border-border text-white;
+}
+
+.table thead {
+    @apply border-b border-border;
+}
+
+.table thead tr {
+    @apply bg-accent
+}
+
+.table thead,
+.table tbody {
+    @apply divide-y-[1px] divide-border;
+}
+
+

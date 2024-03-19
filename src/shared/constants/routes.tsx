@@ -14,6 +14,7 @@ import { SwitchPage } from '../../pages/switch-page/switch-page.tsx';
 import { SelectPage } from '../../pages/select-page/select-page.tsx';
 import { ChipPage } from '../../pages/chip-page/chip-page.tsx';
 import { PaginationPage } from '../../pages/pagination-page/pagination-page.tsx';
+import { TablePage } from '../../pages/table-page/table-page.tsx';
 
 export const ROUTES = [
   {
@@ -30,6 +31,11 @@ export const ROUTES = [
     path: '/float-button',
     element: <FloatButtonPage />,
     title: 'Float Button',
+  },
+  {
+    path: '/table',
+    element: <TablePage />,
+    title: 'Table',
   },
   {
     path: '/collapse',

@@ -80,6 +80,10 @@ export const usePagination = ({
       return [firstPageIndex, DOTS, ...middleRange, DOTS, lastPageIndex];
     }
 
+    if (lastPage && lastPage <= 8) {
+      return Array.from({ length: lastPage }, (_, index) => index + 1);
+    }
+
     return [];
   }, [currentPage, lastPage, siblingCount]);
 
