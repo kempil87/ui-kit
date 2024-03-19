@@ -10,6 +10,7 @@ import { IconButtonPage } from '../../pages/icon-button-page/icon-button-page.ts
 import { FloatButtonPage } from '../../pages/float-button-page/float-button-page.tsx';
 import { SegmentedPage } from '../../pages/segmented-page/segmented-page.tsx';
 import { InputPage } from '../../pages/input-page/input-page.tsx';
+import { SwitchPage } from '../../pages/switch-page/switch-page.tsx';
 
 export const ROUTES = [
   {
@@ -72,5 +73,10 @@ export const ROUTES = [
     element: <InputPage />,
     title: 'Input',
     forms: true,
+  },
+  {
+    path: '/switch',
+    element: <SwitchPage />,
+    title: 'Switch',
   },
 ];
