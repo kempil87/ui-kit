@@ -64,7 +64,7 @@ export const TablePage = () => {
 
       <Table
         cardProps={{
-          title: 'Table with CustomRenderRow',
+          title: 'Table with CustomRenderColumn',
         }}
         columns={columnsWithRender}
         data={data}

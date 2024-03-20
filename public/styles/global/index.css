@@ -5,6 +5,7 @@
 @import "../components/drawer.css";
 @import "../components/select.css";
 @import "../components/table.css";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
