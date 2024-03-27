@@ -17,7 +17,7 @@ export const BadgePage = () => {
           <Button>Badge 12</Button>
         </Badge>
 
-        <Badge content='123'>
+        <Badge withRing={false} content='123'>
           <Button>Badge 123</Button>
         </Badge>
       </div>

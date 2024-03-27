@@ -8,7 +8,6 @@ export const CollapsePage = () => {
       <Collapse>
         <Collapse.Item
           extra={<Button variant='light'>Extra</Button>}
-          opened
           header='Header1'
         >
           Content1
@@ -16,7 +15,7 @@ export const CollapsePage = () => {
 
         <Collapse.Item header='Header1'>Content2</Collapse.Item>
 
-        <Collapse.Item header='Header2'>
+        <Collapse.Item opened header='Header2'>
           Что такое Lorem Ipsum? Lorem Ipsum - это текст-"рыба", часто
           используемый в печати и вэб-дизайне. Lorem Ipsum является стандартной
           "рыбой" для текстов на латинице с начала XVI века. В то время некий

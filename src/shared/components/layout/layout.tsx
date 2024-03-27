@@ -89,7 +89,7 @@ export const Layout = ({ children }: PropsWithChildren) => {
         <aside
           ref={sideBarRef}
           data-visible={visibleSidebar}
-          className='bg-bg peer justify-start overflow-y-auto items-start transition-transform group duration-300 border-r data-[visible=false]:-translate-x-full border-border flex fixed z-[950] bottom-0 top-14 left-0 h-screen w-[300px]'
+          className='bg-bg peer justify-start overflow-y-auto items-start transition-transform group duration-300 border-r data-[visible=false]:-translate-x-full border-border flex fixed z-[950] bottom-0 top-14 left-0 w-[300px]'
         >
           <div className='flex p-4 flex-col gap-2.5 w-full'>
             {ROUTES.map((el) => {

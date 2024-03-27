@@ -82,11 +82,28 @@ module.exports = {
         {}
       );
 
+      const clampUtility = Object.entries(spacing).reduce(
+        (acc, [key, value]) => {
+          acc[`.clamp-${key.replace(/[./]/g, '\\$&')}`] = {
+            width: value,
+            height: value,
+            'min-width': value,
+            'min-height': value,
+            'max-width': value,
+            'max-height': value
+          };
+
+          return acc;
+        },
+        {}
+      );
+
       addVariant('children', '& > *');
       addVariant('children-after', '& > *:after');
 
       addUtilities({
         ...sizeUtility,
+        ...clampUtility,
         '.flex-center': {
           display: 'flex',
           alignItems: 'center',

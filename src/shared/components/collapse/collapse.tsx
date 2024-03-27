@@ -1,5 +1,6 @@
 import { PropsWithChildren, ReactNode, useRef } from 'react';
 import { Icon } from '../icon/icon.tsx';
+import cn from 'classnames';
 
 type CollapseProps = PropsWithChildren;
 export interface CollapseItemProps extends PropsWithChildren {
@@ -8,6 +9,7 @@ export interface CollapseItemProps extends PropsWithChildren {
   onChange?: (opened: boolean) => void;
   icon?: ReactNode;
   extra?: ReactNode;
+  contentClassName?: HTMLDivElement['className'];
 }
 
 export const Collapse = ({ children }: CollapseProps) => {
@@ -28,6 +30,7 @@ Collapse.Item = ({
   header,
   onChange,
   icon,
+  contentClassName,
   extra,
 }: CollapseItemProps) => {
   // eslint-disable-next-line react-hooks/rules-of-hooks
@@ -42,6 +45,11 @@ Collapse.Item = ({
       !JSON.parse(contentRef.current.dataset.open ?? JSON.stringify(opened))
     );
 
+    if (JSON.parse(contentRef.current.dataset.open ?? JSON.stringify(opened))) {
+      contentRef.current.classList.remove('fade-1');
+    } else {
+      contentRef.current.classList.add('fade-1');
+    }
     contentRef.current.dataset.open = updatedOpened;
     headerRef.current.dataset.open = updatedOpened;
 
@@ -74,7 +82,10 @@ Collapse.Item = ({
       </button>
 
       <div
-        className='data-[open=true]:border-t bg-black pointer-events-none group data-[open=true]:pointer-events-auto group data-[open=true]:py-3 data-[open=true]:h-fit h-0 transition-all duration-[400] ease-linear border-border px-4'
+        className={cn(
+          'data-[open=true]:border-t fade-1 bg-black pointer-events-none group data-[open=true]:pointer-events-auto group data-[open=true]:py-3 data-[open=true]:h-fit h-0 transition-all duration-[400] ease-linear border-border px-4',
+          contentClassName
+        )}
         data-open={JSON.stringify(opened)}
         ref={contentRef}
       >

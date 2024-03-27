@@ -94,7 +94,7 @@ export const Table = ({
         </table>
       </div>
 
-      {summary && <div className='mt-4'>{summary}</div>}
+      {summary && <div className='mt-4 w-full'>{summary}</div>}
 
       {pagination && (
         <Pagination

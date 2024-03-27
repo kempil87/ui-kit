@@ -15,6 +15,7 @@ import { SelectPage } from '../../pages/select-page/select-page.tsx';
 import { ChipPage } from '../../pages/chip-page/chip-page.tsx';
 import { PaginationPage } from '../../pages/pagination-page/pagination-page.tsx';
 import { TablePage } from '../../pages/table-page/table-page.tsx';
+import { CheckboxPage } from '../../pages/checkbox-page/checkbox-page.tsx';
 
 export const ROUTES = [
   {
@@ -102,5 +103,10 @@ export const ROUTES = [
     path: '/switch',
     element: <SwitchPage />,
     title: 'Switch',
+  },
+  {
+    path: '/checkbox',
+    element: <CheckboxPage />,
+    title: 'Checkbox',
   },
 ];
