@@ -2,4 +2,13 @@
 ](https://kempil-kit.vercel.app/)
 
 
-Для инициализации потребуется установить библиотеки usehooks-ts classnames tailwindcss postcss autoprefixer @neodx/svg (Для генерации иконок,документация [https://github.com/secundant/neodx](https://github.com/secundant/neodx))
+Для инициализации потребуется установить библиотеки 
+usehooks-ts
+classnames 
+tailwindcss 
+postcss 
+autoprefixer 
+@neodx/svg (Для генерации иконок,документация [https://github.com/secundant/neodx](https://github.com/secundant/neodx))
+react-hotkeys-hook
+zod + @hookform/resolvers
+react-hook-form
