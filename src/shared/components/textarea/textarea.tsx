@@ -1,4 +1,4 @@
-import { ChangeEvent, InputHTMLAttributes, ReactNode, useRef } from 'react';
+import { ChangeEvent, ReactNode, TextareaHTMLAttributes, useRef } from 'react';
 import cn from 'classnames';
 import { IconButton } from '../icon-button/icon-button.tsx';
 import { useIsomorphicLayoutEffect } from 'usehooks-ts';
@@ -10,8 +10,8 @@ import {
   useFormContext,
 } from 'react-hook-form';
 
-interface InputProps
-  extends Omit<InputHTMLAttributes<HTMLInputElement>, 'name'> {
+interface TextareaProps
+  extends Omit<TextareaHTMLAttributes<HTMLTextAreaElement>, 'name'> {
   _prefix?: ReactNode;
   allowClear?: boolean;
   onClear?: () => void;
@@ -20,30 +20,35 @@ interface InputProps
   textChange?: (value: string, unmasked?: string) => void;
   rules?: UseControllerProps['rules'];
   name: string;
+  maxHeight?: number | string;
+  defaultHeight?: number | string;
 }
 
-export const Input = ({
+export const Textarea = ({
   _prefix,
   label,
   onClear,
   allowClear = false,
   mask,
   textChange,
+  maxHeight = 200,
+  defaultHeight = 50,
   rules,
   ...props
-}: InputProps) => {
+}: TextareaProps) => {
   const { control, resetField } = useFormContext();
   const prefixRef = useRef<HTMLDivElement>(null);
-  const inputRef = useRef<HTMLInputElement>(null);
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
   const labelRef = useRef<HTMLLabelElement>(null);
+  const wrapRef = useRef<HTMLDivElement>(null);
 
   useIsomorphicLayoutEffect(() => {
-    if (prefixRef.current && inputRef.current) {
+    if (prefixRef.current && textareaRef.current) {
       const paddingLeft = `${
         prefixRef.current.getBoundingClientRect().width + 14
       }px`;
 
-      inputRef.current.style.paddingLeft = paddingLeft;
+      textareaRef.current.style.paddingLeft = paddingLeft;
 
       if (!labelRef.current) return;
       labelRef.current.style.paddingLeft = paddingLeft;
@@ -56,7 +61,18 @@ export const Input = ({
       name={props.name}
       control={control}
       render={({ field, fieldState }) => {
-        const handleChange = ({ target }: ChangeEvent<HTMLInputElement>) => {
+        const resize = (value?: number) => {
+          if (!textareaRef.current || !wrapRef.current) return;
+
+          wrapRef.current.style.height = `${
+            value || textareaRef.current.scrollTop
+          }px`;
+          textareaRef.current.style.height = `${
+            value || textareaRef.current.scrollTop
+          }px`;
+        };
+
+        const handleChange = ({ target }: ChangeEvent<HTMLTextAreaElement>) => {
           let { value: text } = target;
           if (mask) {
             text = formatWithMask({ text, mask }).masked;
@@ -68,16 +84,28 @@ export const Input = ({
 
           textChange?.(text, formatWithMask({ text, mask }).unmasked);
           field.onChange(text);
+
+          resize();
         };
 
         const handleClear = () => {
           resetField(props.name);
           onClear?.();
+
+          resize(Number(defaultHeight));
         };
 
         return (
           <div className='flex flex-col'>
-            <div className='relative group'>
+            <div
+              ref={wrapRef}
+              className='relative group'
+              style={{
+                minHeight: defaultHeight,
+                height: defaultHeight,
+                maxHeight,
+              }}
+            >
               <div
                 ref={prefixRef}
                 className={cn('pos-abs-y inline-block left-2.5', {
@@ -99,10 +127,15 @@ export const Input = ({
                 </label>
               )}
 
-              <input
-                ref={inputRef}
+              <textarea
+                style={{
+                  minHeight: defaultHeight,
+                  height: defaultHeight,
+                  maxHeight,
+                }}
+                ref={textareaRef}
                 className={cn(
-                  'appearance-none h-9 w-full focus:placeholder:opacity-100 transition-all duration-300 border border-border bg-bg caret-placeholder text-sm placeholder:text-placeholder focus:border-accent active:border-accent focus:outline-0 py-1 px-3.5 rounded-md',
+                  'appearance-none resize-none w-full focus:placeholder:opacity-100 transition-all duration-300 border border-border bg-bg caret-placeholder text-sm placeholder:text-placeholder focus:border-accent active:border-accent focus:outline-0 py-1.5 px-3.5 rounded-md',
                   { 'pr-8': allowClear },
                   { 'placeholder:opacity-0': label }
                 )}

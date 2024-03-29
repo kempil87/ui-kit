@@ -16,6 +16,8 @@ import { ChipPage } from '../../pages/chip-page/chip-page.tsx';
 import { PaginationPage } from '../../pages/pagination-page/pagination-page.tsx';
 import { TablePage } from '../../pages/table-page/table-page.tsx';
 import { CheckboxPage } from '../../pages/checkbox-page/checkbox-page.tsx';
+import { TextareaPage } from '../../pages/textarea-page/textarea-page.tsx';
+import { TreePage } from '../../pages/tree-page/tree-page.tsx';
 
 export const ROUTES = [
   {
@@ -89,10 +91,20 @@ export const ROUTES = [
     title: 'Pagination',
   },
   {
+    path: '/tree',
+    element: <TreePage />,
+    title: 'Tree',
+  },
+  {
     path: '/input',
     element: <InputPage />,
     title: 'Input',
     forms: true,
+  },
+  {
+    path: '/textarea',
+    element: <TextareaPage />,
+    title: 'Textarea',
   },
   {
     path: '/select',

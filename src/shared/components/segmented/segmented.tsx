@@ -1,10 +1,12 @@
 import { HTMLAttributes, ReactNode, useRef } from 'react';
 import cn from 'classnames';
+import { useIsomorphicLayoutEffect } from 'usehooks-ts';
 export interface SegmentedProps
   extends Omit<HTMLAttributes<HTMLDivElement>, 'onChange'> {
   wrapClassName?: HTMLDivElement['className'];
   options: SegmentedOptions;
   onChange?: (value: SegmentOption | string) => void;
+  defaultIndex?: number;
 }
 
 type SegmentedOptions = Array<SegmentOption | string>;
@@ -19,6 +21,7 @@ export const Segmented = ({
   wrapClassName,
   options,
   onChange,
+  defaultIndex,
 }: SegmentedProps) => {
   const segmentRef = useRef<HTMLDivElement>(null);
   const segmentButtonRef = useRef<HTMLButtonElement>(null);
@@ -34,20 +37,31 @@ export const Segmented = ({
     onChange?.(option);
   };
 
+  useIsomorphicLayoutEffect(() => {
+    if (defaultIndex) {
+      if (!segmentRef.current || !options.at(defaultIndex)) return;
+
+      const translateX = 100 * defaultIndex;
+      segmentRef.current.style.transform = `translateX(${translateX}%) translateY(-50%)`;
+    }
+  }, []);
+
+  if (!options.length) return null;
+
   return (
-    <div className={cn('inline-block relative', wrapClassName)}>
+    <div className={cn('w-fit relative overflow-x-auto', wrapClassName)}>
       <div
         style={{
-          width: `calc(${100 / options.length}% - 4px)`,
+          width: `calc(${100 / options.length}%)`,
         }}
         ref={segmentRef}
-        className='bg-white inset-x-1 transition-transform duration-300 rounded opacity-70 h-8 pos-abs-y z-10 '
+        className='bg-white transition-transform duration-300 rounded opacity-70 h-8 pos-abs-y z-10 '
       />
       <div
         style={{
           gridTemplateColumns: `repeat(${options.length}, minmax(0, 1fr))`,
         }}
-        className='bg-accent overflow-x-auto gap-x-2 relative grid border-border border rounded-md'
+        className='bg-accent relative grid border-border border rounded-md'
       >
         {options.map((option) => (
           <button

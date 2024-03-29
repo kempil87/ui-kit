@@ -2,6 +2,7 @@ import { PropsWithChildren, ReactNode, useEffect, useRef } from 'react';
 import cn from 'classnames';
 import { useOnClickOutside } from 'usehooks-ts';
 import { Icon } from '../icon/icon.tsx';
+import { useHotkeys } from 'react-hotkeys-hook';
 
 export interface DrawerProps extends PropsWithChildren {
   header?: ReactNode;
@@ -10,6 +11,7 @@ export interface DrawerProps extends PropsWithChildren {
   closeIcon?: boolean;
   maskClosable?: boolean;
   withBlurMask?: boolean;
+  enabledEscClose?: boolean;
   onClose: () => void;
   position?: 'right' | 'left';
 }
@@ -19,6 +21,7 @@ export const Drawer = ({
   title,
   closeIcon = true,
   visible = false,
+  enabledEscClose = false,
   maskClosable = true,
   withBlurMask = true,
   position = 'right',
@@ -31,8 +34,6 @@ export const Drawer = ({
     onClose();
   };
 
-  useEffect(() => {}, []);
-
   const outsideHandler = () => {
     if (!visible) return;
 
@@ -40,6 +41,16 @@ export const Drawer = ({
       close();
     }
   };
+
+  useEffect(() => {
+    if (visible) {
+      document.body.classList.add('overflow-hidden');
+    } else {
+      document.body.classList.remove('overflow-hidden');
+    }
+  }, [visible]);
+
+  useHotkeys('esc', close, { enabled: !enabledEscClose && visible });
 
   useOnClickOutside(drawerContentRef, outsideHandler);
 

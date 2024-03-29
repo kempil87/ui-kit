@@ -27,7 +27,7 @@ export const SPRITES_META: {
   };
 } = {
   common: {
-    filePath: 'common.e3591619.svg',
+    filePath: 'common.21f5b7f1.svg',
     items: {
       arrow: {
         viewBox: '0 0 22 12',
@@ -60,7 +60,7 @@ export const SPRITES_META: {
         viewBox: '0 0 18 22',
       },
       phone: {
-        viewBox: '0 0 21 22',
+        viewBox: '0 0 20 20',
       },
       search: {
         viewBox: '0 0 22 22',

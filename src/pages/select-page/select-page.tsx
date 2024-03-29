@@ -10,7 +10,6 @@ const options = [
 
 export const SelectPage = () => {
   const formMethods = useForm();
-  console.log(formMethods.watch());
 
   return (
     <Card title='Select'>
@@ -20,16 +19,27 @@ export const SelectPage = () => {
             placeholder='basic select'
             name='select_1'
             options={options}
+            withSearch={false}
           />
+
           <Select
             renderClearAll={(onClear) => (
               <button className='text-sm' onClick={onClear}>
-                Сбросить
+                Remove all
               </button>
             )}
             placeholder='multiple select'
             multiple
-            name='seelect_2'
+            name='select_2'
+            options={options}
+            withSearch={false}
+          />
+
+          <Select
+            placeholder='search select'
+            withSearch
+            onSearch={(input) => console.log(input)}
+            name='select_3'
             options={options}
           />
         </div>

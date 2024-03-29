@@ -25,6 +25,7 @@ export const ModalPage = () => {
       </Modal>
 
       <Modal
+        enabledEscClose
         visible={isVisibleCustom}
         onClose={() => setIsVisibleCustom(false)}
         title='Preview Custom Footer Modal'

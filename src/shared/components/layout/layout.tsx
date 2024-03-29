@@ -96,7 +96,7 @@ export const Layout = ({ children }: PropsWithChildren) => {
               const isActivePage = pathname.startsWith(el.path);
 
               return (
-                <div>
+                <div key={el.path}>
                   {el.forms && (
                     <span className='text-sm block mb-2.5 font-medium'>
                       Form Elements

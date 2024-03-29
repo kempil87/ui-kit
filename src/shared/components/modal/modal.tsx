@@ -3,6 +3,7 @@ import cn from 'classnames';
 import { useOnClickOutside } from 'usehooks-ts';
 import { Button } from '../button/button.tsx';
 import { Icon } from '../icon/icon.tsx';
+import { useHotkeys } from 'react-hotkeys-hook';
 
 export interface ModalProps extends PropsWithChildren {
   header?: ReactNode;
@@ -13,6 +14,7 @@ export interface ModalProps extends PropsWithChildren {
   closeIcon?: boolean;
   maskClosable?: boolean;
   withBlurMask?: boolean;
+  enabledEscClose?: boolean;
   onClose: () => void;
 }
 
@@ -24,6 +26,7 @@ export const Modal = ({
   visible = false,
   maskClosable = true,
   withBlurMask = true,
+  enabledEscClose = false,
   onClose,
   bodyClassName,
   children,
@@ -34,8 +37,6 @@ export const Modal = ({
     onClose();
   };
 
-  useEffect(() => {}, []);
-
   const outsideHandler = () => {
     if (!visible) return;
 
@@ -43,6 +44,16 @@ export const Modal = ({
       close();
     }
   };
+
+  useEffect(() => {
+    if (visible) {
+      document.body.classList.add('overflow-hidden');
+    } else {
+      document.body.classList.remove('overflow-hidden');
+    }
+  }, [visible]);
+
+  useHotkeys('esc', close, { enabled: !enabledEscClose && visible });
 
   useOnClickOutside(contentRef, outsideHandler);
 
