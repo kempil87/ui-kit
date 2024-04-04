@@ -2,7 +2,7 @@ import { PropsWithChildren, ReactNode, useEffect, useRef } from 'react';
 import cn from 'classnames';
 import { useOnClickOutside } from 'usehooks-ts';
 import { Icon } from '../icon/icon.tsx';
-import { useHotkeys } from 'react-hotkeys-hook';
+import { useHotKeys } from '../../hooks/use-hot-keys.ts';
 
 export interface DrawerProps extends PropsWithChildren {
   header?: ReactNode;
@@ -30,7 +30,7 @@ export const Drawer = ({
 }: DrawerProps) => {
   const drawerContentRef = useRef<HTMLDivElement>(null);
 
-  const close = () => {
+  const handleCLoseModal = () => {
     onClose();
   };
 
@@ -38,7 +38,7 @@ export const Drawer = ({
     if (!visible) return;
 
     if (maskClosable) {
-      close();
+      handleCLoseModal();
     }
   };
 
@@ -50,7 +50,9 @@ export const Drawer = ({
     }
   }, [visible]);
 
-  useHotkeys('esc', close, { enabled: !enabledEscClose && visible });
+  useHotKeys('Escape', handleCLoseModal, {
+    enabled: !enabledEscClose && visible,
+  });
 
   useOnClickOutside(drawerContentRef, outsideHandler);
 
@@ -70,7 +72,7 @@ export const Drawer = ({
 
             {closeIcon && (
               <button
-                onClick={close}
+                onClick={handleCLoseModal}
                 className='size-8 flex-center bg-accent border-border border rounded-md hover:bg-bg transition-all duration-300 absolute top-0 right-0'
               >
                 <Icon className='fill-white size-3.5' name='common/close' />

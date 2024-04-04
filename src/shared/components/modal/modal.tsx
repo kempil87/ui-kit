@@ -3,7 +3,7 @@ import cn from 'classnames';
 import { useOnClickOutside } from 'usehooks-ts';
 import { Button } from '../button/button.tsx';
 import { Icon } from '../icon/icon.tsx';
-import { useHotkeys } from 'react-hotkeys-hook';
+import { useHotKeys } from '../../hooks/use-hot-keys.ts';
 
 export interface ModalProps extends PropsWithChildren {
   header?: ReactNode;
@@ -53,7 +53,7 @@ export const Modal = ({
     }
   }, [visible]);
 
-  useHotkeys('esc', close, { enabled: !enabledEscClose && visible });
+  useHotKeys('Escape', close, { enabled: !enabledEscClose && visible });
 
   useOnClickOutside(contentRef, outsideHandler);
 
