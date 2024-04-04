@@ -9,6 +9,5 @@ tailwindcss
 postcss 
 autoprefixer 
 @neodx/svg (Для генерации иконок,документация [https://github.com/secundant/neodx](https://github.com/secundant/neodx))
-react-hotkeys-hook
 zod + @hookform/resolvers
 react-hook-form
