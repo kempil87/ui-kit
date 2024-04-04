@@ -30,7 +30,7 @@ export const Drawer = ({
 }: DrawerProps) => {
   const drawerContentRef = useRef<HTMLDivElement>(null);
 
-  const handleCLoseModal = () => {
+  const handleCloseDrawer = () => {
     onClose();
   };
 
@@ -38,7 +38,7 @@ export const Drawer = ({
     if (!visible) return;
 
     if (maskClosable) {
-      handleCLoseModal();
+      handleCloseDrawer();
     }
   };
 
@@ -50,7 +50,7 @@ export const Drawer = ({
     }
   }, [visible]);
 
-  useHotKeys('Escape', handleCLoseModal, {
+  useHotKeys('Escape', handleCloseDrawer, {
     enabled: !enabledEscClose && visible,
   });
 
@@ -72,7 +72,7 @@ export const Drawer = ({
 
             {closeIcon && (
               <button
-                onClick={handleCLoseModal}
+                onClick={handleCloseDrawer}
                 className='size-8 flex-center bg-accent border-border border rounded-md hover:bg-bg transition-all duration-300 absolute top-0 right-0'
               >
                 <Icon className='fill-white size-3.5' name='common/close' />

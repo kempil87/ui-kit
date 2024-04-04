@@ -33,7 +33,7 @@ export const Modal = ({
 }: ModalProps) => {
   const contentRef = useRef<HTMLDivElement>(null);
 
-  const close = () => {
+  const handleCloseModal = () => {
     onClose();
   };
 
@@ -41,7 +41,7 @@ export const Modal = ({
     if (!visible) return;
 
     if (maskClosable) {
-      close();
+      handleCloseModal();
     }
   };
 
@@ -53,7 +53,9 @@ export const Modal = ({
     }
   }, [visible]);
 
-  useHotKeys('Escape', close, { enabled: !enabledEscClose && visible });
+  useHotKeys('Escape', handleCloseModal, {
+    enabled: !enabledEscClose && visible,
+  });
 
   useOnClickOutside(contentRef, outsideHandler);
 
@@ -71,7 +73,7 @@ export const Modal = ({
 
             {closeIcon && (
               <button
-                onClick={close}
+                onClick={handleCloseModal}
                 className='size-8 flex-center bg-accent border-border border rounded-md hover:bg-bg transition-all duration-300 absolute top-0 right-0'
               >
                 <Icon className='size-3.5' name='common/close' />
@@ -80,7 +82,7 @@ export const Modal = ({
           </div>
         )}
 
-        <div className='py-4'>{children}</div>
+        <div className='py-4 modal-cover'>{children}</div>
 
         {footer || (
           <div className='flex space-x-4 justify-end items-center'>

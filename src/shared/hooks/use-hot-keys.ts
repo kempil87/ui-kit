@@ -57,5 +57,5 @@ export const useHotKeys = (
       window.removeEventListener('keyup', callbackUp);
       window.removeEventListener('keydown', callbackDown);
     };
-  }, [handler, isKeysArray, keys]);
+  }, [handler, isKeysArray, keys, options?.enabled]);
 };
