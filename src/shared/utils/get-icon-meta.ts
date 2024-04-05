@@ -1,23 +1,24 @@
-import { IconName } from '../components/icon/icon.tsx';
+import { IconProps } from '../components/icon/icon.tsx';
 import { SPRITES_META, SpritesMap } from '../types/icon.ts';
 
-export const getIconMeta = <Key extends keyof SpritesMap>(
-  name: IconName<Key>
-) => {
+export const getIconMeta = <Key extends keyof SpritesMap>({
+  name,
+  width,
+  height,
+}: IconProps) => {
   const [spriteName, iconName] = name.split('/') as [Key, SpritesMap[Key]];
 
   const { filePath, items } = SPRITES_META[spriteName];
 
-  const viewBox = items[iconName]?.viewBox || '';
+  const viewBox = items[iconName]?.viewBox;
 
-  const defaultSize = { height: 16, width: 16 };
+  const defaultSize = { height: height ?? 16, width: width ?? 16 };
 
   if (viewBox) {
-    const h = viewBox.split(' ')[3];
-    const w = viewBox.split(' ')[2];
+    const viewBoxEntries = viewBox.split(' ');
 
-    defaultSize.height = Number(h);
-    defaultSize.width = Number(w);
+    defaultSize.height = Number(height ?? viewBoxEntries[3]);
+    defaultSize.width = Number(width ?? viewBoxEntries[2]);
   }
 
   return {

@@ -1,4 +1,4 @@
-import { forwardRef, SVGProps } from 'react';
+import { forwardRef, SVGProps, useMemo } from 'react';
 
 import cn from 'classnames';
 
@@ -18,8 +18,11 @@ export interface IconProps
 }
 
 export const Icon = forwardRef<SVGSVGElement, IconProps>(
-  ({ name, className, ...props }, ref) => {
-    const { viewBox, filePath, iconName, defaultSize } = getIconMeta(name);
+  ({ className, ...props }, ref) => {
+    const { viewBox, filePath, iconName, defaultSize } = useMemo(
+      () => getIconMeta(props),
+      [props]
+    );
 
     return (
       <svg
