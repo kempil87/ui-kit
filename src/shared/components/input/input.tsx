@@ -1,4 +1,11 @@
-import { ChangeEvent, InputHTMLAttributes, ReactNode, useRef } from 'react';
+import {
+  ChangeEvent,
+  forwardRef,
+  InputHTMLAttributes,
+  ReactNode,
+  useImperativeHandle,
+  useRef,
+} from 'react';
 import cn from 'classnames';
 import { IconButton } from '../icon-button/icon-button.tsx';
 import { useIsomorphicLayoutEffect } from 'usehooks-ts';
@@ -9,9 +16,10 @@ import {
   UseControllerProps,
   useFormContext,
 } from 'react-hook-form';
+import { enabledNumberKeyEvent } from './common/enabled-keyboard-options.ts';
 
 interface InputProps
-  extends Omit<InputHTMLAttributes<HTMLInputElement>, 'name'> {
+  extends Omit<InputHTMLAttributes<HTMLInputElement>, 'name' | 'type'> {
   _prefix?: ReactNode;
   allowClear?: boolean;
   onClear?: () => void;
@@ -20,118 +28,150 @@ interface InputProps
   textChange?: (value: string, unmasked?: string) => void;
   rules?: UseControllerProps['rules'];
   name: string;
+  type?: 'number' | 'text';
 }
 
-export const Input = ({
-  _prefix,
-  label,
-  onClear,
-  allowClear = false,
-  mask,
-  textChange,
-  rules,
-  ...props
-}: InputProps) => {
-  const { control, resetField } = useFormContext();
-  const prefixRef = useRef<HTMLDivElement>(null);
-  const inputRef = useRef<HTMLInputElement>(null);
-  const labelRef = useRef<HTMLLabelElement>(null);
+export interface InputMethods {
+  focus: () => void;
+  blur: () => void;
+}
 
-  useIsomorphicLayoutEffect(() => {
-    if (prefixRef.current && inputRef.current) {
-      const paddingLeft = `${
-        prefixRef.current.getBoundingClientRect().width + 14
-      }px`;
+export const Input = forwardRef(
+  (
+    {
+      _prefix,
+      label,
+      onClear,
+      allowClear = false,
+      mask,
+      textChange,
+      rules,
+      ...props
+    }: InputProps,
+    parentRef
+  ) => {
+    const { control, resetField } = useFormContext();
+    const prefixRef = useRef<HTMLDivElement>(null);
+    const inputRef = useRef<HTMLInputElement>(null);
+    const labelRef = useRef<HTMLLabelElement>(null);
 
-      inputRef.current.style.paddingLeft = paddingLeft;
+    const imperativeFocus = () => {
+      if (!inputRef.current) return;
 
-      if (!labelRef.current) return;
-      labelRef.current.style.paddingLeft = paddingLeft;
-    }
-  }, []);
+      inputRef.current.focus();
+    };
 
-  return (
-    <Controller
-      rules={rules}
-      name={props.name}
-      control={control}
-      render={({ field, fieldState }) => {
-        const handleChange = ({ target }: ChangeEvent<HTMLInputElement>) => {
-          let { value: text } = target;
-          if (mask) {
-            text = formatWithMask({ text, mask }).masked;
-          }
+    const imperativeBlur = () => {
+      if (!inputRef.current) return;
 
-          if (props.maxLength && text.length >= props.maxLength) {
-            text = text.slice(0, props.maxLength);
-          }
+      inputRef.current.blur();
+    };
 
-          textChange?.(text, formatWithMask({ text, mask }).unmasked);
-          field.onChange(text);
-        };
+    useImperativeHandle(parentRef, () => ({
+      focus: imperativeFocus,
+      blur: imperativeBlur,
+    }));
 
-        const handleClear = () => {
-          resetField(props.name);
-          onClear?.();
-        };
+    useIsomorphicLayoutEffect(() => {
+      if (prefixRef.current && inputRef.current) {
+        const paddingLeft = `${
+          prefixRef.current.getBoundingClientRect().width + 14
+        }px`;
 
-        return (
-          <div className='flex flex-col'>
-            <div className='relative group'>
-              <div
-                ref={prefixRef}
-                className={cn('pos-abs-y inline-block left-2.5', {
-                  invisible: !_prefix,
-                })}
-              >
-                {_prefix}
+        inputRef.current.style.paddingLeft = paddingLeft;
+
+        if (!labelRef.current) return;
+        labelRef.current.style.paddingLeft = paddingLeft;
+      }
+    }, []);
+
+    return (
+      <Controller
+        rules={rules}
+        name={props.name}
+        control={control}
+        render={({ field, fieldState }) => {
+          const handleChange = ({ target }: ChangeEvent<HTMLInputElement>) => {
+            let { value: text } = target;
+
+            if (mask) {
+              text = formatWithMask({ text, mask }).masked;
+            }
+
+            if (props.maxLength && text.length >= props.maxLength) {
+              text = text.slice(0, props.maxLength);
+            }
+
+            textChange?.(text, formatWithMask({ text, mask }).unmasked);
+            field.onChange(text);
+          };
+
+          const handleClear = () => {
+            resetField(props.name);
+            onClear?.();
+          };
+
+          return (
+            <div className='flex flex-col'>
+              <div className='relative group'>
+                <div
+                  ref={prefixRef}
+                  className={cn('pos-abs-y inline-block left-2.5', {
+                    invisible: !_prefix,
+                  })}
+                >
+                  {_prefix}
+                </div>
+
+                {label && (
+                  <label
+                    ref={labelRef}
+                    className={cn(
+                      'pos-abs-y text-sm pointer-events-none pl-3.5 group-focus-within:!top-0 group-focus-within:!pl-2 group-focus-within:text-xs transition-all duration-300 text-placeholder inline-block',
+                      { '!top-0 !text-xs !pl-2': field.value }
+                    )}
+                  >
+                    {label}
+                  </label>
+                )}
+
+                <input
+                  ref={inputRef}
+                  className={cn(
+                    'appearance-none h-9 w-full focus:placeholder:text-placeholder transition-all duration-300 border border-border bg-bg caret-placeholder text-sm placeholder:text-placeholder focus:border-accent active:border-accent focus:outline-0 py-1 px-3.5 rounded-md',
+                    { 'pr-8': allowClear },
+                    { 'placeholder:text-transparent': label }
+                  )}
+                  {...props}
+                  onChange={handleChange}
+                  value={field.value ?? ''}
+                  {...(props.type === 'number' && enabledNumberKeyEvent)}
+                />
+
+                {field.value && allowClear && (
+                  <IconButton
+                    title='Clear'
+                    onClick={handleClear}
+                    className={cn('pos-abs-y right-1 size-6')}
+                    iconProps={{
+                      name: 'common/close',
+                      className: 'size-3.5',
+                    }}
+                  />
+                )}
               </div>
 
-              {label && (
-                <label
-                  ref={labelRef}
-                  className={cn(
-                    'pos-abs-y text-sm pointer-events-none pl-3.5 group-focus-within:!top-0 group-focus-within:!pl-2 group-focus-within:text-xs transition-all duration-300 text-placeholder inline-block',
-                    { '!top-0 !text-xs !pl-2': field.value }
-                  )}
-                >
-                  {label}
-                </label>
-              )}
-
-              <input
-                ref={inputRef}
-                className={cn(
-                  'appearance-none h-9 w-full focus:placeholder:opacity-100 transition-all duration-300 border border-border bg-bg caret-placeholder text-sm placeholder:text-placeholder focus:border-accent active:border-accent focus:outline-0 py-1 px-3.5 rounded-md',
-                  { 'pr-8': allowClear },
-                  { 'placeholder:opacity-0': label }
-                )}
-                {...props}
-                onChange={handleChange}
-                value={field.value ?? ''}
-              />
-
-              {field.value && allowClear && (
-                <IconButton
-                  title='Clear'
-                  onClick={handleClear}
-                  className={cn('pos-abs-y right-1 size-6')}
-                  iconProps={{
-                    name: 'common/close',
-                    className: 'size-3.5',
-                  }}
-                />
+              {fieldState.error?.message && (
+                <span className='text-red block font-medium mt-2 text-xs pl-2'>
+                  {fieldState.error.message}
+                </span>
               )}
             </div>
+          );
+        }}
+      />
+    );
+  }
+);
 
-            {fieldState.error?.message && (
-              <div className='text-red font-medium mt-2 text-xs pl-2'>
-                {fieldState.error.message}
-              </div>
-            )}
-          </div>
-        );
-      }}
-    />
-  );
-};
+Input.displayName = 'Input';

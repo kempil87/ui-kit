@@ -158,9 +158,9 @@ export const Textarea = ({
             </div>
 
             {fieldState.error?.message && (
-              <div className='text-red font-medium mt-2 text-xs pl-2'>
+              <span className='text-red block font-medium mt-2 text-xs pl-2'>
                 {fieldState.error.message}
-              </div>
+              </span>
             )}
           </div>
         );

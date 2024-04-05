@@ -5,9 +5,15 @@ import { Tooltip } from '../../shared/components/tooltip/tooltip.tsx';
 export const TooltipPage = () => {
   return (
     <Card title='Tooltip'>
-      <Tooltip content={<span>Delete?</span>}>
-        <Button>Delete</Button>
-      </Tooltip>
+      <div className='inline-flex items-center gap-4'>
+        <Tooltip arrow={false} content={<span>Delete?</span>}>
+          <Button>Delete</Button>
+        </Tooltip>
+
+        <Tooltip content={<span>arrow={'{true}'}</span>}>
+          <Button>WithArrow</Button>
+        </Tooltip>
+      </div>
     </Card>
   );
 };

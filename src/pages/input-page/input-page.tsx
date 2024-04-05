@@ -1,5 +1,5 @@
 import { Card } from '../../shared/components/card/card.tsx';
-import { Input } from '../../shared/components/input/input.tsx';
+import { Input, InputMethods } from '../../shared/components/input/input.tsx';
 import { Icon } from '../../shared/components/icon/icon.tsx';
 import { FormProvider, useForm } from 'react-hook-form';
 import { Button } from '../../shared/components/button/button.tsx';
@@ -8,6 +8,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { parseMask } from '../../shared/utils/format-with-mask.ts';
 import { ParseMaskPatterns } from '../../shared/constants/parse-mask-patterns.ts';
 import { Masks } from '../../shared/constants/masks.ts';
+import { useRef } from 'react';
 
 interface FormProps {
   email: string;
@@ -28,7 +29,9 @@ export const InputPage = () => {
     resolver: zodResolver(schema),
   });
 
-  const onClear = () => alert('Field as clear');
+  const someInputRef = useRef<InputMethods>(null);
+
+  const onClear = () => alert('Field "Clearable Input" as clear');
 
   const submitForm = (fields: FormProps) => {
     console.log(
@@ -36,11 +39,44 @@ export const InputPage = () => {
     );
   };
 
+  const onFocusSecondInput = () => {
+    if (!someInputRef.current) return;
+
+    someInputRef.current.focus();
+  };
+
+  const onBlurSecondInput = () => {
+    if (!someInputRef.current) return;
+
+    someInputRef.current.blur();
+  };
+
   return (
     <FormProvider {...form}>
-      <Card title='Textarea'>
+      <Card
+        title='Textarea'
+        extra={
+          <div className='inline-flex items-center gap-4'>
+            <Button variant='light' onClick={onFocusSecondInput}>
+              Focus for second Input
+            </Button>
+
+            <Button variant='light' onClick={onBlurSecondInput}>
+              Blur for second Input
+            </Button>
+          </div>
+        }
+      >
         <div className='grid gap-5 grid-cols-1 lg:grid-cols-3'>
           <Input name='basic' placeholder='Basic usage' label='Basic label' />
+          <Input
+            ref={someInputRef}
+            name='number'
+            placeholder='Number usage'
+            label='Number label'
+            type='number'
+          />
+
           <Input
             name='clear'
             placeholder='Clear usage'
@@ -48,11 +84,13 @@ export const InputPage = () => {
             allowClear
             onClear={onClear}
           />
+
           <Input
             name='prefix'
             _prefix={<Icon className='size-4' name='common/user' />}
             placeholder='Preffix usage'
           />
+
           <Input
             name='mask'
             _prefix={<Icon className='size-4' name='common/phone' />}

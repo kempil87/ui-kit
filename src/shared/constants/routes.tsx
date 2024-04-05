@@ -18,6 +18,7 @@ import { TablePage } from '../../pages/table-page/table-page.tsx';
 import { CheckboxPage } from '../../pages/checkbox-page/checkbox-page.tsx';
 import { TextareaPage } from '../../pages/textarea-page/textarea-page.tsx';
 import { TreePage } from '../../pages/tree-page/tree-page.tsx';
+import { UploaderPage } from '../../pages/uploader-page/uploader-page.tsx';
 
 export const ROUTES = [
   {
@@ -120,5 +121,10 @@ export const ROUTES = [
     path: '/checkbox',
     element: <CheckboxPage />,
     title: 'Checkbox',
+  },
+  {
+    path: '/uploader',
+    element: <UploaderPage />,
+    title: 'Uploader',
   },
 ];

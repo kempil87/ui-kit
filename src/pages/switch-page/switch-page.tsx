@@ -7,7 +7,7 @@ export const SwitchPage = () => {
   const [isActive, setIsActive] = useState(false);
 
   return (
-    <Card title='Checkbox'>
+    <Card title='Switch'>
       <div className='flex gap-5 flex-col'>
         <Switch value={isActive} onChange={setIsActive} />
 

@@ -26,7 +26,7 @@ export const Switch = ({
     <div className={cn('inline-flex items-center gap-1.5', wrapClassName)}>
       <label
         className={cn(
-          'h-[17px] transition-all duration-300 cursor-pointer select-none w-8 relative rounded-full p-px bg-bg border-border border',
+          'h-7 transition-all duration-300 cursor-pointer select-none w-12 relative rounded-full p-px bg-bg border-border border',
           { 'bg-placeholder': value },
           { '!cursor-not-allowed': disabled }
         )}
@@ -37,15 +37,15 @@ export const Switch = ({
           value={JSON.stringify(value)}
           onChange={change}
           type='checkbox'
-          className='focus:outline-0'
+          className='focus:outline-0 peer'
           {...{ disabled, id }}
         />
         <div
           style={{
-            transform: `translateY(-50%) translateX(${value ? 14 : 0}px)`,
+            transform: `translateY(-50%) translateX(${value ? 22 : 0}px)`,
           }}
           className={cn(
-            'rounded-full left-0.5 transition-all duration-500 absolute top-1/2 bg-white size-3'
+            'rounded-full left-0.5 transition-all duration-500 pos-abs-y bg-white size-5'
           )}
         />
       </label>
