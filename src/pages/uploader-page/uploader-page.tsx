@@ -6,19 +6,23 @@ import { Button } from '../../shared/components/button/button.tsx';
 export const UploaderPage = () => {
   const methods = useForm();
 
-  const onError = (files: File[]) =>
-    alert(
-      'Custom Error by Extension for:' +
-        JSON.stringify(files.map((el) => el.name).join(','))
-    );
+  const onError = (files: File[]) => {
+    methods.setError('files', {
+      message:
+        'Custom Error by Extension for:' +
+        JSON.stringify(files.map((el) => el.name).join(',')),
+    });
+  };
 
   const onSizeError = (files: File[]) =>
-    alert(
-      'Custom Error by Size for:' +
-        JSON.stringify(files.map((el) => el.name).join(','))
-    );
+    methods.setError('files', {
+      message:
+        'Custom Error by Size for:' +
+        JSON.stringify(files.map((el) => el.name).join(',')),
+    });
 
   console.log(methods.watch(), 'files watcher');
+  console.log(methods.formState.errors, 'error watcher');
 
   return (
     <FormProvider {...methods}>
@@ -38,13 +42,14 @@ export const UploaderPage = () => {
               onError: onSizeError,
             }}
             name='files'
+            tooltip={(file) => `Custom Tooltip for ${file.name}`}
           />
 
           <span className='text-placeholder block text-sm font-bold'>
             Multiple Uploader
           </span>
 
-          <Uploader multiple name='multi_files' />
+          <Uploader tooltip={false} multiple name='multi_files' />
 
           <span className='text-placeholder block text-sm font-bold'>
             Disabled Uploader

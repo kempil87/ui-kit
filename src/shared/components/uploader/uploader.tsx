@@ -9,8 +9,8 @@ import {
 import cn from 'classnames';
 import { checkExtension } from './check-extension.ts';
 import { checkSize } from './check-size.ts';
-import { Icon } from '../icon/icon.tsx';
-import { Tooltip } from '../tooltip/tooltip.tsx';
+import { UploadItem } from './upload-item.tsx';
+import { FormError } from '../form-error/form-error.tsx';
 
 export interface UploaderProps {
   name: string;
@@ -22,12 +22,19 @@ export interface UploaderProps {
   rules?: RegisterOptions;
   inputProps?: InputHTMLAttributes<HTMLInputElement>;
   renderUploader?: (files: File[]) => ReactNode;
-  renderUploadFile?: (file: File, index: number) => ReactNode;
+  renderUploadFile?: (
+    file: File,
+    index: number,
+    onFileRemove: (file: File, index: number) => void
+  ) => ReactNode;
   multiple?: boolean;
   disabled?: boolean;
   showUploadList?: boolean;
   handleChange?: (name: string, files: File[]) => void;
+  tooltip?: boolean | TooltipCallback;
 }
+
+type TooltipCallback = (file: File) => ReactNode;
 
 export type ExtensionOptions = {
   list: string[];
@@ -49,6 +56,7 @@ export const Uploader = ({
   onPreviewRemove,
   handleChange,
   multiple,
+  tooltip = true,
   renderUploader,
   renderUploadFile,
   disabled,
@@ -74,7 +82,7 @@ export const Uploader = ({
       control={control}
       name={name}
       rules={rules}
-      render={({ field: { onChange, value }, fieldState }) => {
+      render={({ field: { onChange, value } }) => {
         const handleUpload = (fileList: FileList | null) => {
           if (!fileList || disabled) return;
 
@@ -102,8 +110,8 @@ export const Uploader = ({
             }
           }
 
-          const returnedFiles = (() => {
-            if (Array.isArray(value) && multiple) {
+          const returnedFiles = ((): FileArray => {
+            if (Array.isArray(value as FileArray) && multiple) {
               return value.concat(files);
             }
 
@@ -152,7 +160,7 @@ export const Uploader = ({
           handleUpload(e.dataTransfer.files);
         };
 
-        const onFileRemove = (index: number, file: File) => {
+        const onFileRemove = (file: File, index: number) => {
           if (!Array.isArray(value)) return;
 
           const returnedFiles = (value as FileArray).filter(
@@ -237,57 +245,23 @@ export const Uploader = ({
                     onClick={(e) => e.stopPropagation()}
                     className='flex flex-wrap min-w-full mt-2 select-none items-center gap-4 rounded-md border border-dotted border-accent bg-bg p-4'
                   >
-                    {(value as FileArray).map(
-                      (file, index) =>
-                        renderUploadFile?.(file, index) || (
-                          <Tooltip
-                            key={`${file.lastModified}${index}`}
-                            content={file.name}
-                          >
-                            <button
-                              title={file.name}
-                              className='border-border border border-dotted group rounded-md relative p-1.5'
-                            >
-                              <div className='bg-black/50 opacity-0 transition-all duration-300 group-hover:opacity-100 invisible group-hover:visible absolute inset-0' />
-
-                              {file.type.includes('image/') ? (
-                                <img
-                                  alt={file.name}
-                                  className='aspect-[1/1.2] rounded-md text-xs object-cover'
-                                  width={70}
-                                  src={URL.createObjectURL(file)}
-                                />
-                              ) : (
-                                <Icon
-                                  className='fill-placeholder'
-                                  width={70}
-                                  height={70 * 1.2}
-                                  name='common/search'
-                                />
-                              )}
-
-                              <button
-                                onClick={() => onFileRemove(index, file)}
-                                className='pos-abs opacity-0 transition-all duration-300 group-hover:opacity-100 invisible group-hover:visible'
-                              >
-                                <Icon
-                                  className='clamp-4 text-white'
-                                  name='common/basket'
-                                />
-                              </button>
-                            </button>
-                          </Tooltip>
-                        )
-                    )}
+                    {(value as FileArray).map((file, index) => (
+                      <UploadItem
+                        key={`${file.lastModified}${index}`}
+                        {...{
+                          file,
+                          index,
+                          renderUploadFile,
+                          onFileRemove,
+                          tooltip,
+                        }}
+                      />
+                    ))}
                   </div>
                 )}
             </div>
 
-            {fieldState.error?.message && !renderUploader && (
-              <span className='text-red block font-medium mt-2 text-xs pl-2'>
-                {fieldState.error.message}
-              </span>
-            )}
+            <FormError name={name} />
           </div>
         );
       }}

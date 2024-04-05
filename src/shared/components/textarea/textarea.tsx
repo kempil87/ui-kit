@@ -4,11 +4,8 @@ import { IconButton } from '../icon-button/icon-button.tsx';
 import { useIsomorphicLayoutEffect } from 'usehooks-ts';
 import { Mask } from '../../types/mask.ts';
 import formatWithMask from '../../utils/format-with-mask.ts';
-import {
-  Controller,
-  UseControllerProps,
-  useFormContext,
-} from 'react-hook-form';
+import { Controller, RegisterOptions, useFormContext } from 'react-hook-form';
+import { FormError } from '../form-error/form-error.tsx';
 
 interface TextareaProps
   extends Omit<TextareaHTMLAttributes<HTMLTextAreaElement>, 'name'> {
@@ -18,7 +15,7 @@ interface TextareaProps
   label?: string;
   mask?: Mask;
   textChange?: (value: string, unmasked?: string) => void;
-  rules?: UseControllerProps['rules'];
+  rules?: RegisterOptions;
   name: string;
   maxHeight?: number | string;
   defaultHeight?: number | string;
@@ -60,7 +57,7 @@ export const Textarea = ({
       rules={rules}
       name={props.name}
       control={control}
-      render={({ field, fieldState }) => {
+      render={({ field }) => {
         const resize = (value?: number) => {
           if (!textareaRef.current || !wrapRef.current) return;
 
@@ -157,11 +154,7 @@ export const Textarea = ({
               )}
             </div>
 
-            {fieldState.error?.message && (
-              <span className='text-red block font-medium mt-2 text-xs pl-2'>
-                {fieldState.error.message}
-              </span>
-            )}
+            <FormError name={props.name} />
           </div>
         );
       }}

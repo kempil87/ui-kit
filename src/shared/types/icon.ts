@@ -7,6 +7,7 @@ export interface SpritesMap {
     | 'collapse'
     | 'done'
     | 'empty'
+    | 'file'
     | 'home'
     | 'long_arrow'
     | 'notification'
@@ -27,7 +28,7 @@ export const SPRITES_META: {
   };
 } = {
   common: {
-    filePath: 'common.21f5b7f1.svg',
+    filePath: 'common.93fa8302.svg',
     items: {
       arrow: {
         viewBox: '0 0 22 12',
@@ -48,6 +49,9 @@ export const SPRITES_META: {
         viewBox: '0 0 20 16',
       },
       empty: {
+        viewBox: '0 0 24 24',
+      },
+      file: {
         viewBox: '0 0 24 24',
       },
       home: {

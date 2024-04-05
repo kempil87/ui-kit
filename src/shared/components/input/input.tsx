@@ -11,12 +11,9 @@ import { IconButton } from '../icon-button/icon-button.tsx';
 import { useIsomorphicLayoutEffect } from 'usehooks-ts';
 import { Mask } from '../../types/mask.ts';
 import formatWithMask from '../../utils/format-with-mask.ts';
-import {
-  Controller,
-  UseControllerProps,
-  useFormContext,
-} from 'react-hook-form';
+import { Controller, RegisterOptions, useFormContext } from 'react-hook-form';
 import { enabledNumberKeyEvent } from './common/enabled-keyboard-options.ts';
+import { FormError } from '../form-error/form-error.tsx';
 
 interface InputProps
   extends Omit<InputHTMLAttributes<HTMLInputElement>, 'name' | 'type'> {
@@ -26,7 +23,7 @@ interface InputProps
   label?: string;
   mask?: Mask;
   textChange?: (value: string, unmasked?: string) => void;
-  rules?: UseControllerProps['rules'];
+  rules?: RegisterOptions;
   name: string;
   type?: 'number' | 'text';
 }
@@ -90,7 +87,7 @@ export const Input = forwardRef(
         rules={rules}
         name={props.name}
         control={control}
-        render={({ field, fieldState }) => {
+        render={({ field }) => {
           const handleChange = ({ target }: ChangeEvent<HTMLInputElement>) => {
             let { value: text } = target;
 
@@ -161,11 +158,7 @@ export const Input = forwardRef(
                 )}
               </div>
 
-              {fieldState.error?.message && (
-                <span className='text-red block font-medium mt-2 text-xs pl-2'>
-                  {fieldState.error.message}
-                </span>
-              )}
+              <FormError name={props.name} />
             </div>
           );
         }}
