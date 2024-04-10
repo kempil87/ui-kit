@@ -5,10 +5,8 @@ import { FormProvider, useForm } from 'react-hook-form';
 import { Button } from '../../shared/components/button/button.tsx';
 import z from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { parseMask } from '../../shared/utils/format-with-mask.ts';
-import { ParseMaskPatterns } from '../../shared/constants/parse-mask-patterns.ts';
-import { Masks } from '../../shared/constants/masks.ts';
 import { useRef } from 'react';
+import { Mask } from '../../shared/utils/mask.ts';
 
 interface FormProps {
   email: string;
@@ -35,7 +33,7 @@ export const InputPage = () => {
 
   const submitForm = (fields: FormProps) => {
     console.log(
-      parseMask({ text: fields.mask, pattern: ParseMaskPatterns.phone })
+      Mask.parse({ text: fields.mask, pattern: Mask.patterns.phone })
     );
   };
 
@@ -54,7 +52,7 @@ export const InputPage = () => {
   return (
     <FormProvider {...form}>
       <Card
-        title='Textarea'
+        title='TimePicker'
         extra={
           <div className='inline-flex items-center gap-4'>
             <Button variant='light' onClick={onFocusSecondInput}>
@@ -96,7 +94,7 @@ export const InputPage = () => {
             _prefix={<Icon className='size-4' name='common/phone' />}
             placeholder='Mask usage'
             label='Mask'
-            mask={Masks.phone}
+            mask={Mask.masks.phone}
             textChange={(value, unmasked) => console.log(value, unmasked)}
           />
 

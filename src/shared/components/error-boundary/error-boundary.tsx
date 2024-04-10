@@ -1,7 +1,7 @@
 import { Component, ErrorInfo, PropsWithChildren, ReactNode } from 'react';
 
 export interface ErrorBoundaryProps extends PropsWithChildren {
-  content: ReactNode;
+  content?: ReactNode;
 }
 
 interface ErrorBoundaryState {
@@ -25,7 +25,11 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
     if (this.state.hasError) {
       return (
         <div className='fixed inset-0 overflow-hidden bg-bg'>
-          {this.props.content}
+          {this.props.content || (
+            <div className='flex-center h-screen'>
+              Error Boundary started work
+            </div>
+          )}
         </div>
       );
     }

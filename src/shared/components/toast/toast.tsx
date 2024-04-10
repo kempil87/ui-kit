@@ -14,7 +14,7 @@ export const ToastProvider = () => {
       <div
         className='fixed pointer-events-none z-full flex-col gap-6 inset-x-0 flex items-center top-16'
         id='toast-container'
-      ></div>
+      />
     </Portal>
   );
 };

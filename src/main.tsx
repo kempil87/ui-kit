@@ -9,13 +9,7 @@ import ErrorBoundary from './shared/components/error-boundary/error-boundary.tsx
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <BrowserRouter>
-      <ErrorBoundary
-        content={
-          <div className='flex-center h-screen'>
-            Error Boundary started work
-          </div>
-        }
-      >
+      <ErrorBoundary>
         <App />
       </ErrorBoundary>
 
@@ -46,16 +40,11 @@ declare global {
 Array.prototype.latest = function <T, U>(
   callback: (item: T, index: number, last: boolean, array: T[]) => U
 ): U[] {
-  const newArray: U[] = [];
+  const result: U[] = [];
 
-  let index = 0;
-
-  for (const item of this) {
-    const last = index === this.length - 1;
-
-    newArray.push(callback(item, index, last, this));
-    index++;
+  for (let i = 0; i < this.length; i++) {
+    result.push(callback(this[i], i, i === this.length - 1, this));
   }
 
-  return newArray;
+  return result;
 };

@@ -36,7 +36,7 @@ export const TextareaPage = () => {
               defaultHeight={40}
               name='desc'
               placeholder='Desc enter'
-              label='Basic Textarea'
+              label='Basic TimePicker'
             />
 
             <Textarea
@@ -44,7 +44,7 @@ export const TextareaPage = () => {
               _prefix={<Icon className='size-4' name='common/user' />}
               name='desc2'
               placeholder='Desc enter'
-              label='Textarea with Prefix'
+              label='TimePicker with Prefix'
             />
 
             <Textarea
@@ -53,7 +53,7 @@ export const TextareaPage = () => {
               allowClear
               name='desc3'
               placeholder='Desc enter'
-              label='Textarea with default Height'
+              label='TimePicker with default Height'
             />
           </div>
 

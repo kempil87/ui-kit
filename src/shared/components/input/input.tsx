@@ -15,7 +15,7 @@ import { Controller, RegisterOptions, useFormContext } from 'react-hook-form';
 import { enabledNumberKeyEvent } from './common/enabled-keyboard-options.ts';
 import { FormError } from '../form-error/form-error.tsx';
 
-interface InputProps
+export interface InputProps
   extends Omit<InputHTMLAttributes<HTMLInputElement>, 'name' | 'type'> {
   _prefix?: ReactNode;
   allowClear?: boolean;

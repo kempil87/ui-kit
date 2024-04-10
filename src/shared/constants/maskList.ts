@@ -1,4 +1,4 @@
-export const Masks = {
+export const MaskList = {
   phone: [
     '+',
     '7',

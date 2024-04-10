@@ -19,6 +19,8 @@ import { CheckboxPage } from '../../pages/checkbox-page/checkbox-page.tsx';
 import { TextareaPage } from '../../pages/textarea-page/textarea-page.tsx';
 import { TreePage } from '../../pages/tree-page/tree-page.tsx';
 import { UploaderPage } from '../../pages/uploader-page/uploader-page.tsx';
+import { BreadcrumbsPage } from '../../pages/breadcrumbs-page/breadcrumbs-page.tsx';
+import { TimePickerPage } from '../../pages/time-picker-page/time-picker-page.tsx';
 
 export const ROUTES = [
   {
@@ -92,6 +94,11 @@ export const ROUTES = [
     title: 'Pagination',
   },
   {
+    path: '/breadcrumbs',
+    element: <BreadcrumbsPage />,
+    title: 'Breadcrumbs',
+  },
+  {
     path: '/tree',
     element: <TreePage />,
     title: 'Tree',
@@ -126,5 +133,10 @@ export const ROUTES = [
     path: '/uploader',
     element: <UploaderPage />,
     title: 'Uploader',
+  },
+  {
+    path: '/time-picker-page',
+    element: <TimePickerPage />,
+    title: 'TimePicker',
   },
 ];
